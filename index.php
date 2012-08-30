@@ -1,11 +1,10 @@
 <?php
 
-include 'config.php';
 
-function __autoload($class)
-{
-    require 'core/' . $class . '.php';
-}
+
+include 'core/Bootstrap.php';
+
+$app = new Bootstrap();
 
 $moduleManager = new ModuleManager();
 $modName = $moduleManager->getModName();

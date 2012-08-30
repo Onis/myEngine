@@ -12,6 +12,7 @@ class View
      */
     public function render($name)
     {
-            require 'modules/' . $name. 'views/'. $name . '.php';
+        $name = explode('/', $name);
+        require 'modules/' . $name[0] . '/views/' . $name[1]. '.php';
     }
 }
