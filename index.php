@@ -4,15 +4,13 @@ include 'config.php';
 
 function __autoload($class)
 {
-    require 'classes/' . $class . '.php';
+    require 'core/' . $class . '.php';
 }
 
 $moduleManager = new ModuleManager();
-$url = $moduleManager->getModName();
-if($url) {
-    $moduleManager->loadModule($url);
+$modName = $moduleManager->getModName();
+if($modName) {
+    $moduleManager->loadModule($modName);
+} else {
+    echo 'Module not found';
 }
-
-
-
-?>

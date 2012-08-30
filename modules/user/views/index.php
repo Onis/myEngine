@@ -1,0 +1,1 @@
+<h1>This is view to module user!</h1>
