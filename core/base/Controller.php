@@ -3,11 +3,6 @@
 class Controller
 {
     /**
-     * @var
-     */
-    private $model;
-
-    /**
      *
      */
     public function __construct()
