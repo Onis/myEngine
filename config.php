@@ -9,12 +9,5 @@ define('DB_USER', 'root');
 define('DB_PASS', '123');
 
 define('URL', 'http://localhost/MyEngine/');
-
-
-
-// The sitewide hashkey, do not change this because it`s used for passwords!
-// This is for other hash keys ... Not sure yet
-define('HASH_GENERAL_KEY', 'MixitUp200');
-
-// This is for database password only
-define('HASH_PASSWORD_KEY', 'catsFLYhigh2000miles');
+define('HASH_GENERAL_KEY', 'MixUp200');
+define('HASH_PASSWORD_KEY', 'catsFlyHigh2000miles');

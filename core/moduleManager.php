@@ -2,17 +2,25 @@
 
 class ModuleManager
 {
+
     /**
-     *
-     * @return mixed
+     *  Регистрирация всех модулей в системе
      */
-    public function getModName()
+    public function registrationModule()
     {
-        return isset($_GET['url']) ? $_GET['url'] : null;
+
     }
 
     /**
-     *
+     *  Возвращение списка всех модулей
+     */
+    public function returnModules()
+    {
+
+    }
+
+    /**
+     *  Подключение всех модулей находящихся в системе
      * @param string $modName
      */
     public function loadModule ($modName)
