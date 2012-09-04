@@ -6,29 +6,33 @@ class ModuleManager
     /**
      *  Регистрирация всех модулей в системе
      */
-    public function registrationModule()
+    public function registrationModule($modules)
     {
+        foreach($modules as $modName) {
+            $this->loadModule($modName);
+        }
 
     }
 
-    /**
-     *  Возвращение списка всех модулей
-     */
-    public function returnModules()
-    {
-
-    }
-
-    /**
-     *  Подключение всех модулей находящихся в системе
+     /**
+     *  Подключение модуля, находящегося в системе
      * @param string $modName
      */
     public function loadModule ($modName)
     {
-        $mod_path = SITE_ROOT . '/modules/' . $modName . '/index.php';
+        $mod_path = SITE_ROOT . '/modules/' . $modName . '/' . $modName . '.php';
         if (file_exists($mod_path))
         {
             include_once($mod_path);
         }
     }
+
+    /**
+     *  Возвращение списка всех модулей
+     */
+    public function returnModules($modules)
+    {
+        return $modules;
+    }
+
 }

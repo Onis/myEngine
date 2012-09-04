@@ -6,7 +6,7 @@ class Bootstrap
 
     public function __construct()
     {
-        require '/../config.php';
+         $this->_config = require '/../config.php';
 
         require CORE . '/ModuleManager.php';
 
@@ -15,6 +15,9 @@ class Bootstrap
         require BASE . '/View.php';
 
         require CORE . '/Database.php';
+
+        return $this->_config;
+
 
         //require '';
     }
