@@ -2,6 +2,8 @@
 
 class Controller
 {
+    /** @var Model */
+
     /**
      *
      */
@@ -15,10 +17,10 @@ class Controller
      */
     public function loadModel($name)
     {
-        $path = 'modules/' . $name . 'models/' . $name . '_model.php';
+        $path = MODULES . $name . '/models/' . $name . '_model.php';
         if (file_exists($path)) {
-            require 'modules/' . $name . 'models/' . $name . '_model.php';
-            $modelName = $name . '_Model';
+            require $path;
+            $modelName = $name . '_model';
             $this->model = new $modelName;
         }
 

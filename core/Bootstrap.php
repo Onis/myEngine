@@ -8,8 +8,7 @@ class Bootstrap
     {
         $this->requireAllFiles();
         $moduleManager = new ModuleManager();
-        ModuleManager::handlerURL($this->_config);
-        var_dump(ModuleManager::$_modules);
+        ModuleManager::loadModule('User');
 
     }
 

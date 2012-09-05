@@ -11,7 +11,7 @@ class ModuleManager
      */
     public static function loadModule ($module_name)
     {
-        $module_path = MODULES . $module_name . '/' . $module_name . '.php';
+        $module_path = MODULES . $module_name . '/' . $module_name . 'Module.php';
         if (file_exists($module_path))
         {
             include_once($module_path);

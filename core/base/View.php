@@ -2,6 +2,7 @@
 
 class View
 {
+
     /**
      *
      */
@@ -10,9 +11,17 @@ class View
     /**
      * @param string $name
      */
-    public function render($name)
+    public function render($name, $noInclude = false)
     {
         $name = explode('/', $name);
-        require 'modules/' . $name[0] . '/views/' . $name[1]. '.php';
+        if ($noInclude == true) {
+            require MODULES . $name[0] . '/views/' . $name[1]. '.php';
+        } else {
+            require VIEWS . 'header.php';
+            require MODULES . $name[0] . '/views/' . $name[1]. '.php';
+            require VIEWS . 'footer.php';
+        }
+
+
     }
 }

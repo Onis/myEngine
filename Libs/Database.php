@@ -1,301 +1,69 @@
 <?php
 
-class Database
+class Database extends PDO
 {
-    /**
-     * @param string cсылка на подключение к базе данных
-     */
-    private static $link;
-
-    /**
-     * @param boolean результат запроса
-     */
-    private static $result;
-
-    /**
-     * @param object ссылка на объект
-     */
-    private static $instance;
-
-    /**
-     * @param string данные
-     */
-    private static $data = array();
-
-    /**
-     * @param string текст выполненного SQL-запроса
-     */
-    private static $query;
-
-    /**
-     * @param string имя таблицы
-     */
-    private static $table;
-
-    /**
-     * Создание объекта(одиночка)
-     * @return object
-     */
-    public static function getInstance()
+    function __construct($DB_TYPE, $DB_HOST, $DB_NAME, $DB_USER, $DB_PASS)
     {
-        return (null !== self::$instance) ? self::$instance : (self::$instance = new self());
+        parent::__construct($DB_TYPE.':host='.$DB_HOST.'; dbname='.$DB_NAME, $DB_USER, $DB_PASS);
     }
 
     /**
-     * Подключение к БД
-     * @param $host string имя сервера
-     * @param $user string имя пользователь
-     * @param $password string пароль
-     * @param $db_name string имя базы данных
-     * @throws Exception
+     * select
+     * @param string $sql An SQL string
+     * @param array $array Parameters to bind
+     * @param int $fetchMode A PDO Fetch mode
+     * @return array
      */
-    public static function connect($host, $user, $password, $db_name)
+    public function select($sql, $array = array(), $fetchMode = PDO::FETCH_ASSOC)
     {
-        self::$link = new mysqli($host, $user, $password, $db_name);
-        if (self::$link->connect_error) {
-            throw new Exception(get_class() . ': Could not connect: ' . self::$link->connect_error);
+        $sth = $this->prepare($sql);
+        foreach ($array as $key => $value) {
+            $sth->bindValue("$key", $value);
         }
-        return self::$link;
+        $sth->execute();
+        return $sth->fetchAll($fetchMode);
     }
 
     /**
-     * Отключение от БД
+     * insert
+     * @param string $table A name of table to insert into
+     * @param array $data An associative array
      */
-    public static function disconect()
+    public function insert($table, $data)
     {
-        self::$link->close();
-    }
-
-    /**
-     * Установление кодировки
-     * @param string $charset кодировка
-     * @throws Exception
-     */
-    public static function setCharSet($charset)
-    {
-        if (!self::$link->set_charset($charset)) {
-            throw new Exception('Error loading character set : ' . $charset);
-        }
-    }
-
-    /**
-     * Вывод кодировки
-     * @return string возвращает имя установленной кодировки
-     */
-    public static function getCharSet()
-    {
-        return self::$link->character_set_name();
-    }
-
-    /**
-     * Выводит результат выборки
-     * @param string $type ...
-     * @throws Exception
-     * @return array/object возвращает результат выполнения выборки
-     */
-    public static function getResult($type = 'array')
-    {
-        switch ($type) {
-            case 'array':
-                while ($row = self::$result->fetch_assoc()) {
-                    self::$data[] = $row;
-                }
-                break;
-            case 'object':
-                while ($obj = self::$result->fetch_object()) {
-                    self::$data[] = $obj;
-                }
-                break;
-            default:
-                throw new Exception('Undefined argument: ' . $type);
-        }
-        return self::$data;
-    }
-
-    /**
-     * Выполняет запрос
-     * @param $query string SQL - запрос
-     * @throws Exception
-     * @return string
-     */
-    public static function exeQuery($query)
-    {
-        self::$result = self::$link->query($query);
-        if (self::$link->errno) {
-            throw new Exception('Error executing the query: ' . self::$link->error);
-        }
-        return self::$query = $query;
-    }
-
-    /**
-     * Вывод текста последнего запроса
-     * @return string возвращает содержимое SQL-запроса
-     */
-    public static function getLastQuery()
-    {
-        return self::$query;
-    }
-
-    /**
-     * Вывод информации по SQL-запросу
-     * @return array возвращает информацию по SQL-запросу
-     */
-    public static function setQueryInfo()
-    {
-        $info = array(
-            'affected_rows' => self::$result->affected_rows,
-            'insert_id' => self::$result->insert_id,
-            'num_rows' => self::$result->num_rows,
-            'field_count' => self::$result->field_count,
-            'sqlstate' => self::$result->sqlstate,
-        );
-        return $info;
-    }
-
-    /**
-     * Получает число рядов в результирующей выборке
-     *
-     * @return boolean true or false
-     */
-    public static function getNumRows()
-    {
-        return (self::$result->num_rows) ? true : false;
-    }
-
-    /**
-     * Коробочный метод insert
-     * Используеться следующим образом:
-     * 1 параметр - массив с данными
-     *
-     * DB::insert(array('fields1'=>'values1'));
-     * @param $fields array данные
-     */
-    public static function insert($fields)
-    {
-        $fields_array = Database::setArrayParameters('fields', $fields);
-        $values_array = Database::setArrayParameters('values', $fields);
-        $sql = "INSERT INTO " . self::getTable() . " ($fields_array) VALUES ($values_array);";
-        DB::ExeQuery($sql);
-    }
-
-    /**
-     * Коробочный метод update
-     * Используеться следующим образом:
-     * 1 параметр - данные: название поля = значение
-     * 2 параметр - условие
-     *
-     * DB::update(array('fields1'=>'values1'), array('fields1'=>'condition1'));
-     * @param $set array обновляемое поле со значением обновления
-     * @param $condition array условие по которому будет проходить обновление
-     */
-    public static function update($set, $condition)
-    {
-        $set_array = Database::setArrayParameters('set', $set);
-        $conditions_array = Database::setArrayParameters('where', $condition);
-        $sql = "UPDATE " . self::getTable() . " SET $set_array WHERE ($conditions_array) ;";
-        DB::ExeQuery($sql);
-    }
-
-    /**
-     * Коробочный метод select
-     * Используеться следующим образом:
-     * 1 параметр - отображаемые поля
-     * 2 параметр - условие
-     * 3 параметр - операнд
-     *
-     * DB::select(array(fields), [array('fields1'=>'condition1', 'fields2'=>'condition')], ['opedand']);
-     * @param $fields string поля, которые будут отображаться
-     * @param $conditions array условие по которому будет проходить выборка
-     * @param $operand string логический оператор, соединяющий 2 или более условий
-     * @return string
-     */
-    public static function select($fields, $conditions = null, $operand = null)
-    {
-        is_array($fields) ? $fields_array = Database::setArrayParameters('fields', $fields) : $fields_array = $fields;
-        if ($conditions != null) {
-            if ($operand == null) {
-                $conditions_array = "WHERE (" . Database::setArrayParameters('where', $conditions) . ");";
-            } else {
-                $conditions_array = "WHERE (" . Database::setArrayParameters('where', $conditions, $operand) . ");";
-            }
-        } else {
-            $conditions_array = null;
-        }
-
-        $sql = "SELECT $fields_array FROM " . self::getTable() . " $conditions_array ;";
-        return DB::ExeQuery($sql);
-    }
-
-    /**
-     * Коробочный метод delete
-     * Используеться следующим образом:
-     * 1 параметр - условие
-     *
-     * DB::delete(array('fields'=>'condition'));
-     * @param $conditions array условие по которому будет проходить выборка
-     */
-    public static function delete($conditions)
-    {
-        $conditions_array = Database::setArrayParameters('where', $conditions);
-        $sql = "DELETE FROM " . self::getTable() . " WHERE ($conditions_array)";
-        Database::ExeQuery($sql);
-    }
-
-    /**
-     * Преобразовывает массив в строку
-     * @param $type string
-     * @param $data array массив с данными
-     * @param $operands логический оператор
-     * @return string возвращает преобразованную строку из массива
-     * @throws Exception
-     */
-    public static function setArrayParameters($type, $data, $operand = null)
-    {
-        $lenght = 2;
-        $input_string = '';
+        ksort($data);
+        $fieldNames = implode('`, `', array_keys($data));
+        $fieldValues = ':' . implode(', :', array_keys($data));
+        $sth = $this->prepare("INSERT INTO $table (`$fieldNames`) VALUES ($fieldValues);");
         foreach ($data as $key => $value) {
-            switch ($type) {
-                case 'set':
-                    $input_string .= ", `$key` = '$value'";
-                    break;
-                case 'where':
-                    if ($operand == null) {
-                        $input_string .= ", `$key` = '$value'";
-                    } else {
-                        $lenght = strlen(trim($operand)) + 1;
-                        $input_string .= " $operand `$key` = '$value'";
-                    }
-                    break;
-                case 'fields':
-                    $input_string .= ", `$key`";
-                    break;
-                case 'values':
-                    $input_string .= ", '$value'";
-                    break;
-                default:
-                    throw new Exception('Type is not correct');
-            }
+            $sth->bindValue(":$key", $value);
         }
-        return substr($input_string, $lenght);
-
+        $sth->execute();
     }
 
     /**
-     * Получает имя использованной таблицы
-     * @return string возвращает имя таблицы
+     * @param string $table A name of table to update
+     * @param array $data An associative array
+     * @param string $where The WHERE query part
      */
-    public static function getTable()
+    public function update($table, $data, $where)
     {
-        return self::$table;
+        ksort($data);
+        $fieldDetails = NULL;
+        foreach ($data as $key => $value) {
+            $fieldDetails .= "`$key` = :$key,";
+        }
+        $fieldDetails = rtrim($fieldDetails, ',');
+        $sth = $this->prepare("UPDATE $table SET $fieldDetails WHERE $where;");
+        foreach ($data as $key => $value) {
+            $sth->bindValue(":$key", $value);
+        }
+        $sth->execute();
     }
 
-    /**
-     * Устанавливает имя используемой таблицы
-     * @param $table string имя таблицы
-     */
-    public static function setTable($table)
+    public function delete($table, $where, $limit = 1)
     {
-        self::$table = $table;
+        return $this->exec("DELETE FROM $table WHERE $where LIMIT $limit");
     }
 
 }
