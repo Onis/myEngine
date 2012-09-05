@@ -4,9 +4,10 @@ class ModuleManager
 {
 
     /**
-     *  Регистрирация всех модулей в системе
+     * Регистрирация всех модулей в системе
+     * @param array $modules Массив с именами подключаемых модулей
      */
-    public function registrationModule($modules)
+    public function registrationModules($modules)
     {
         foreach($modules as $modName) {
             $this->loadModule($modName);
@@ -15,24 +16,15 @@ class ModuleManager
     }
 
      /**
-     *  Подключение модуля, находящегося в системе
-     * @param string $modName
+     * Подключение модуля, находящегося в системе
+     * @param string $modName Имя подключаемого модуля
      */
-    public function loadModule ($modName)
+    public function loadModule ($module_name)
     {
-        $mod_path = SITE_ROOT . '/modules/' . $modName . '/' . $modName . '.php';
-        if (file_exists($mod_path))
+        $module_path = SITE_ROOT . '/modules/' . $module_name . '/' . $module_name . '.php';
+        if (file_exists($module_path))
         {
-            include_once($mod_path);
+            include_once($module_path);
         }
     }
-
-    /**
-     *  Возвращение списка всех модулей
-     */
-    public function returnModules($modules)
-    {
-        return $modules;
-    }
-
 }

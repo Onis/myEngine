@@ -1,8 +1,8 @@
 <?php
 
 define ('SITE_ROOT', dirname(__FILE__));
-define('CORE', dirname(__FILE__) . '/core');
-define('BASE', dirname(__FILE__) . '/core/base');
+define('CORE', dirname(__FILE__) . '/core/');
+define('BASE', dirname(__FILE__) . '/core/base/');
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'engine');
 define('DB_USER', 'root');
