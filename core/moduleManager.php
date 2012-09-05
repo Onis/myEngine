@@ -2,23 +2,13 @@
 
 class ModuleManager
 {
-    /**
-     * Регистрирация всех модулей в системе
-     * @param array $modules Массив с именами подключаемых модулей
-     */
-    public function registrationModules($modules)
-    {
-        foreach($modules as $module_name) {
-            $this->loadModule($module_name);
-        }
 
-    }
 
      /**
      * Подключение модуля, находящегося в системе
      * @param string $modName Имя подключаемого модуля
      */
-    public function loadModule ($module_name)
+    public static function loadModule ($module_name)
     {
         $module_path = MODULES . $module_name . '/' . $module_name . '.php';
         if (file_exists($module_path))
@@ -27,7 +17,9 @@ class ModuleManager
         }
     }
 
-    public function handlerURL($module_names)
+
+
+    public static function handlerURL($module_names)
     {
         $module_root = array();
         foreach ($module_names as $module_name) {
@@ -39,7 +31,17 @@ class ModuleManager
         }
 
         return $module_root;
+    }
 
+    /**
+     * Регистрирация всех модулей в системе
+     * @param array $modules Массив с именами подключаемых модулей
+     */
+    public static function registrationModules($modules)
+    {
+        foreach($modules as $module_name) {
+            ModuleManager::loadModule($module_name);
+        }
 
     }
 }

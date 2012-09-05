@@ -2,10 +2,19 @@
 
 class Bootstrap
 {
+    protected $_config;
 
     public function __construct()
     {
-         $this->_config = require 'config.php';
+        $this->requireAllFiles();
+        $moduleManager = new ModuleManager();
+        var_dump(ModuleManager::handlerURL($this->_config));
+
+    }
+
+    public function requireAllFiles()
+    {
+        $this->_config = require 'config.php';
 
         require CORE . 'ModuleManager.php';
 
@@ -14,9 +23,6 @@ class Bootstrap
         require BASE . 'View.php';
 
         require CORE . 'Database.php';
-
-        return $this->_config;
-
 
         //require '';
     }
