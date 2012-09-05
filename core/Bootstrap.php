@@ -2,11 +2,10 @@
 
 class Bootstrap
 {
-    const PATH_CONFIG = 'C:/wamp/www/MyEngine/config.php';
 
     public function __construct()
     {
-         $this->_config = require Bootstrap::PATH_CONFIG;
+         $this->_config = require 'config.php';
 
         require CORE . 'ModuleManager.php';
 
