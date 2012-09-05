@@ -3,6 +3,7 @@
 class ModuleManager
 {
 
+    static $_modules = array();
 
      /**
      * Подключение модуля, находящегося в системе
@@ -21,16 +22,13 @@ class ModuleManager
 
     public static function handlerURL($module_names)
     {
-        $module_root = array();
         foreach ($module_names as $module_name) {
             $modPath = MODULES . $module_name . '/routes.php';
             if (file_exists($modPath)) {
                 $module_path = require $modPath;
-                $module_root[$module_name] = $module_path;
+                ModuleManager::$_modules[$module_name] = $module_path;
             }
         }
-
-        return $module_root;
     }
 
     /**
