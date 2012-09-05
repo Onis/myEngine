@@ -19,7 +19,10 @@ class ModuleManager
     }
 
 
-
+    /**
+     * @static
+     * @param array $module_names
+     */
     public static function handlerURL($module_names)
     {
         foreach ($module_names as $module_name) {

@@ -23,7 +23,9 @@ class Bootstrap
         require BASE . 'Model.php';
         require BASE . 'View.php';
 
-        require CORE . 'Database.php';
+        require LIBS . 'Database.php';
+        require LIBS . 'Hash.php';
+        require LIBS . 'Session.php';
 
         //require '';
     }
