@@ -2,10 +2,6 @@
 
 class ModuleManager
 {
-
-    public function sad(){
-        echo 'ololo';
-    }
     /**
      * Регистрирация всех модулей в системе
      * @param array $modules Массив с именами подключаемых модулей
