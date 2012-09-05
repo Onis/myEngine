@@ -8,8 +8,8 @@ class ModuleManager
      */
     public function registrationModules($modules)
     {
-        foreach($modules as $modName) {
-            $this->loadModule($modName);
+        foreach($modules as $module_name) {
+            $this->loadModule($module_name);
         }
 
     }
@@ -20,10 +20,26 @@ class ModuleManager
      */
     public function loadModule ($module_name)
     {
-        $module_path = SITE_ROOT . '/modules/' . $module_name . '/' . $module_name . '.php';
+        $module_path = MODULES . $module_name . '/' . $module_name . '.php';
         if (file_exists($module_path))
         {
             include_once($module_path);
         }
+    }
+
+    public function handlerURL($module_names)
+    {
+        $module_root = array();
+        foreach ($module_names as $module_name) {
+            $modPath = MODULES . $module_name . '/routes.php';
+            if (file_exists($modPath)) {
+                $module_path = require $modPath;
+                $module_root[$module_name] = $module_path;
+            }
+        }
+
+        return $module_root;
+
+
     }
 }
