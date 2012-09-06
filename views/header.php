@@ -8,8 +8,8 @@
 
     <div id="header">
         <a href="<?php echo URL; ?>index">Index</a>
-        <a href="<?php echo URL; ?>user">News</a>
-        <a href="<?php echo URL; ?>news">Users</a>
+        <a href="<?php echo URL; ?>news">News</a>
+        <a href="<?php echo URL; ?>user">Users</a>
     </div>
 
     <div id="content">

@@ -4,6 +4,6 @@ return array(
     '#^user/?$#',
     '#^user/index/?$#',
     '#^user/create/?$#',
-    '#^user/update/(\d+)/?$#',
+    '#^user/edit/(\d+)/?$#',
     '#^user/delete/(\d+)/?$#',
     );

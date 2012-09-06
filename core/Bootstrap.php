@@ -41,7 +41,7 @@ class Bootstrap
         $models = ModuleManager::$_modules;
         foreach ($models as $key1 => $value1 ) {
             foreach ($value1 as $value2) {
-                if(preg_match($value2, $url) == true) {
+                if(preg_match($value2, $url) ) {
                     ModuleManager::loadModule($key1);
                 }
             }

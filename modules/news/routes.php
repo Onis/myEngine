@@ -1,9 +1,9 @@
 <?php
 
 return array(
-        '#^news/?$#',
-        '#^news/index/?$#',
-        '#^news/create/?$#',
-        '#^news/update/(\d+)/?$#',
-        '#^news/delete/(\d+)/?$#',
+'#^news/?$#',
+'#^news/index/?$#',
+'#^news/create/?$#',
+'#^news/edit/(\d+)/?$#',
+'#^news/delete/(\d+)/?$#',
     );
