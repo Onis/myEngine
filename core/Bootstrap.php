@@ -8,10 +8,14 @@ class Bootstrap
     {
         $this->requireAllFiles();
         $moduleManager = new ModuleManager();
-        if(isset($_GET['url'])) {
-            $this->handlerURL($_GET['url']);
+        if(empty($_GET['url']) || $_GET['url'] == 'index') {
+            ModuleManager::loadModule('index');
+
         } else {
-            echo 'Module is not found';
+            if($this->handlerURL($_GET['url'])) {
+                ModuleManager::loadModule('error');
+            }
+
         }
 
 
@@ -43,9 +47,11 @@ class Bootstrap
             foreach ($value1 as $value2) {
                 if(preg_match($value2, $url) ) {
                     ModuleManager::loadModule($key1);
+                    return false;
                 }
             }
         }
+        ModuleManager::loadModule('error');
     }
 
 }

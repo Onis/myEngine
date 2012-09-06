@@ -3,7 +3,7 @@
 return array(
 '#^news/?$#',
 '#^news/index/?$#',
-'#^news/create/?$#',
+'#^news/xhrInsert/?$#',
 '#^news/edit/(\d+)/?$#',
-'#^news/delete/(\d+)/?$#',
+'#^news/xhrDeleteListing/(\d+)/?$#',
     );

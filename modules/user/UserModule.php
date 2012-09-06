@@ -41,7 +41,7 @@ $file = 'controllers/' . $url[0] . '.php';
 if(file_exists($file)) {
     require $file;
 } else {
-    require 'controllers/error.php';
+    require 'controllers/ErrorController.php';
     $controller = new Error();
     return false;
 }
