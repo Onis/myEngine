@@ -31,7 +31,7 @@
 
 /*
 if (empty($url[0])) {
-    require 'controllers/index.php';
+    require 'controllers/NewsModule.php';
     $controller = new Index();
     $controller->index();
     return false;

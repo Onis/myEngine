@@ -2,13 +2,18 @@
 
 class Bootstrap
 {
-    protected $_config;
+    public $_config;
 
     public function __construct()
     {
         $this->requireAllFiles();
         $moduleManager = new ModuleManager();
-        ModuleManager::loadModule('User');
+        if(isset($_GET['url'])) {
+            $this->handlerURL($_GET['url']);
+        } else {
+            echo 'Module is not found';
+        }
+
 
     }
 
@@ -27,6 +32,20 @@ class Bootstrap
         require LIBS . 'Session.php';
 
         //require '';
+    }
+
+
+    public function handlerURL($url)
+    {
+        ModuleManager::collectorURL($this->_config);
+        $models = ModuleManager::$_modules;
+        foreach ($models as $key1 => $value1 ) {
+            foreach ($value1 as $value2) {
+                if(preg_match($value2, $url) == true) {
+                    ModuleManager::loadModule($key1);
+                }
+            }
+        }
     }
 
 }

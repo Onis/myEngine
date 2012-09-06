@@ -3,6 +3,11 @@
 class ModuleManager
 {
 
+    public function __construct()
+    {
+
+    }
+
     static $_modules = array();
 
      /**
@@ -23,7 +28,7 @@ class ModuleManager
      * @static
      * @param array $module_names
      */
-    public static function handlerURL($module_names)
+    public static function collectorURL($module_names)
     {
         foreach ($module_names as $module_name) {
             $modPath = MODULES . $module_name . '/routes.php';
@@ -35,7 +40,7 @@ class ModuleManager
     }
 
     /**
-     * Регистрирация всех модулей в системе
+     * Регистрация всех модулей в системе
      * @param array $modules Массив с именами подключаемых модулей
      */
     public static function registrationModules($modules)
