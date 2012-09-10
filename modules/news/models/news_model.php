@@ -8,24 +8,19 @@ class News_Model extends Model
 
     }
 
-    function xhrInsert()
+    function create()
     {
         $text = $_POST['text'];
         $this->db->insert('data', array('text' => $text));
-
-        $data = array('text' => $text, 'id' => $this->db->lastInsertId());
-        echo json_encode($data);
     }
 
-    function xhrGetListings()
+    function select()
     {
-        $result = $this->db->select('SELECT * FROM data;');
-        echo json_encode($result);
+        return $this->db->select('SELECT * FROM data;');
     }
 
-    function xhrDeleteListing()
+    function delete($id)
     {
-        $id = (int) $_POST['id'];
-        $this->db->delete('data', "id = '$id''");
+        $this->db->delete('data', "id = $id");
     }
 }

@@ -2,9 +2,23 @@ Dashboard... Logged in only...
 
 <br />
 
-<form id="randomInsert" action="<?php echo URL; ?>news/xhrInsert" method="POST">
-    <input type="text" name="text" />
+<form action="<?php echo URL; ?>news/create" method="POST">
+    <input type="text" name="text">
     <input type="submit" />
 </form>
 
 <br />
+
+<table>
+    <?php
+    foreach ($this->newsList as $key => $value) {
+        echo '<tr>';
+        echo '<td>'.$value['id'].'</td>';
+        echo '<td>'.$value['text'].'</td>';
+
+        echo '<td>
+                    <a href="' .URL. 'news/delete/'.$value['id'].'">Delete</a></td>';
+        echo '</tr>';
+    }
+    ?>
+</table>

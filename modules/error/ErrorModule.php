@@ -1,4 +1,10 @@
 <?php
-require 'controllers/ErrorController.php';
-$controller = new ErrorController();
-$controller->index();
+
+class ErrorModule extends Module
+{
+    public function __construct()
+    {
+        $this->loadController('error');
+        $this->loadIndexMethod();
+    }
+}

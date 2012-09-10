@@ -20,6 +20,9 @@ class ModuleManager
         if (file_exists($module_path))
         {
             include_once($module_path);
+            $moduleName = $module_name . 'Module';
+            @$module = new $moduleName;
+            //return $module;
         }
     }
 

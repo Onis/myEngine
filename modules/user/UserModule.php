@@ -1,30 +1,30 @@
 <?php
 
-    $module = new Module();
-    $url = $module->getURL();
-    $controller = $module->loadController($url[0]);
-    print_r($url);
-    $controller->loadModel($url[0]);
-    if (empty($url[1])) {
-        $controller->index();
-        return false;
-    }
-    print_r($url);
+class UserModule extends Module
+{
+    public function __construct()
+    {
+        parent::__construct();
 
+        $this->loadModel();
 
-     if(isset($url[1])) {
-        if (method_exists($controller, $url[1])) {
-            $controller->{$url[1]}($url[2]);
-        } else {
-            echo 'offff';
+        if (empty($this->url[1])) {
+            $this->loadIndexMethod();
+            return false;
         }
-    } else {
-        if(isset($url[1])) {
-            $controller->{$url[1]}();
+
+        if(isset($this->url[1])) {
+            $this->loadMethods(true);
         } else {
-            $controller->index();
+            if(isset($this->url[1])) {
+                $this->loadMethods();
+            } else {
+                $this->loadIndexMethod();
+            }
         }
     }
+}
+
 
 /*
 if (empty($url[0])) {

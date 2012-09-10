@@ -9,22 +9,25 @@ class NewsController extends Controller
 
     function index()
     {
+        $this->view->newsList = $this->model->select();
         $this->view->render('news/index');
     }
 
-    function xhrInsert()
+    function create()
     {
-        $this->model->xhrInsert();
+        $this->model->create();
+        header('Location: ' . URL . 'news');
 
     }
 
-    function xhrGetListings()
+    function select()
     {
         $this->model->xhrGetListings();
     }
 
-    function xhrDeleteListing()
+    public function delete($id)
     {
-        $this->model->xhrDeleteListing();
+        $this->model->delete($id);
+        header('Location: ' . URL . 'news');
     }
 }

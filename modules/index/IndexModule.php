@@ -1,4 +1,10 @@
 <?php
-require 'controllers/IndexController.php';
-$controller = new IndexController();
-$controller->index();
+
+class IndexModule extends Module
+{
+    public function __construct()
+    {
+        $this->loadController('index');
+        $this->loadIndexMethod();
+    }
+}

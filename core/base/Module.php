@@ -2,9 +2,13 @@
 
 class Module
 {
+    public $controller;
+    public $url;
+
     public function __construct()
     {
-
+        $this->getURL();
+        $this->loadController($this->url[0]);
     }
 
     public function loadController($name)
@@ -13,8 +17,7 @@ class Module
         if (file_exists($path)) {
             require $path;
             $controllerName = $name . 'Controller';
-            $controller = new $controllerName;
-            return $controller;
+            $this->controller = new $controllerName;
         }
     }
 
@@ -24,6 +27,31 @@ class Module
         $url = rtrim($url, '/');
         $url = filter_var($url, FILTER_SANITIZE_URL);
         $url = explode('/', $url);
-        return $url;
+        $this->url = $url;
     }
+
+    public function loadModel()
+    {
+        $this->controller->loadModel($this->url[0]);
+    }
+
+    public function loadMethods($param = false)
+    {
+        if (method_exists($this->controller, $this->url[1])) {
+            if($param == true){
+                $this->controller->{$this->url[1]}($this->url[2]);
+            } else {
+                $this->controller->{$this->url[1]}();
+            }
+        } else {
+            throw new Exception('Method ' . $this->url[1]. ' not found!!');
+        }
+    }
+
+    public function loadIndexMethod()
+    {
+        $this->controller->index();
+    }
+
+
 }

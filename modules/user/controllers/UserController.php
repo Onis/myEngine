@@ -43,7 +43,7 @@ class UserController extends Controller
         header('Location: ' . URL . 'user');
     }
 
-        public function delete($id)
+    public function delete($id)
     {
         $this->model->delete($id);
         header('Location: ' . URL . 'user');
