@@ -1,10 +1,6 @@
-Dashboard... Logged in only...
-
-<br />
-
-<form action="<?php echo URL; ?>news/create" method="POST">
+<form class="form-inline" action="<?php echo URL; ?>news/create" method="POST">
     <input type="text" name="text">
-    <input type="submit" />
+    <input type="submit" class="btn">
 </form>
 
 <br />

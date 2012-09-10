@@ -1,7 +1,7 @@
     </div>
 
     <div id="footer">
-        (C) Footer
+        <address>(C) Footer</address>
     </div>
 
 
