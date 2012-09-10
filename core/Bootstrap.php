@@ -30,6 +30,7 @@ class Bootstrap
         require BASE . 'Controller.php';
         require BASE . 'Model.php';
         require BASE . 'View.php';
+        require BASE . 'Module.php';
 
         require LIBS . 'Database.php';
         require LIBS . 'Hash.php';

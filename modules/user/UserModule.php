@@ -1,12 +1,9 @@
 <?php
-    $url = isset($_GET['url']) ? $_GET['url'] : null;
-    $url = rtrim($url, '/');
-    $url = filter_var($url, FILTER_SANITIZE_URL);
-    $url = explode('/', $url);
 
-    //print_r($url);
-    require 'controllers/UserController.php';
-    $controller = new UserController();
+    $module = new Module();
+    $url = $module->getURL();
+    $controller = $module->loadController($url[0]);
+    print_r($url);
     $controller->loadModel($url[0]);
     if (empty($url[1])) {
         $controller->index();
