@@ -21,7 +21,7 @@ class ModuleManager
         {
             include_once($module_path);
             $moduleName = $module_name . 'Module';
-            @$module = new $moduleName;
+            $module = new $moduleName;
             //return $module;
         }
     }

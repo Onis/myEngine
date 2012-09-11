@@ -7,7 +7,6 @@ class Bootstrap
     public function __construct()
     {
         $this->requireAllFiles();
-        $moduleManager = new ModuleManager();
         if(empty($_GET['url']) || $_GET['url'] == 'index') {
             ModuleManager::loadModule('index');
 

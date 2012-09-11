@@ -8,7 +8,7 @@ define('CORE', dirname(__FILE__) . '/core/');
 define('BASE', dirname(__FILE__) . '/core/base/');
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'engine');
+define('DB_NAME', 'mvc');
 define('DB_USER', 'root');
 define('DB_PASS', '123');
 

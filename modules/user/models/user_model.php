@@ -5,6 +5,20 @@ class User_Model extends Model
     public function __construct()
     {
         parent::__construct();
+        $this->createTableUser();
+    }
+
+    public function createTableUser()
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS user
+                (id SERIAL,
+                login VARCHAR(50),
+                password VARCHAR(50),
+                role ENUM('default','admin','owner') NOT NULL DEFAULT  'default'
+                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+        $sth = $this->db->prepare($sql);
+        $sth->execute();
+
     }
 
     public function userList()
