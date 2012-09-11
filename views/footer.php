@@ -1,9 +1,11 @@
+            </div>
+            <div class="span2">
+                <hr>
+                (c) Footer
+
+
+            </div>
+        </div>
     </div>
-
-    <div id="footer">
-        <address>(C) Footer</address>
-    </div>
-
-
 </body>
 </html>
