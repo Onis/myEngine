@@ -26,7 +26,7 @@ $this->db->insert('user', array(
                                         'login'=>'demo',
                                        'password'=>'e2b9d39151d4bf3612c6335fca797e92',
                                        'role'=>'default'));
-           $this->db->insert('user', array(
+           $this->db->insert('user', array(  а н
                 'login'=>'admin',
                 'password'=>'de08519a47754249769a51e875b6d07a',
                 'role'=>'admin'));

@@ -1,0 +1,10 @@
+body {
+    margin: 30px 70px 10px 70px;
+    border: 1px solid blue;
+
+}
+
+#header {
+    text-align: center; /* Выравнивание по центру */
+    padding: 20px; /* Отступы вокруг текста */ /* Цвет фона шапки */
+}
