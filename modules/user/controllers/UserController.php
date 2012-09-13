@@ -13,17 +13,6 @@ class UserController extends Controller
         $this->view->render('user/index');
     }
 
-        public function create()
-    {
-        $data = array();
-        $data['login'] = $_POST['login'];
-        $data['password'] = $_POST['password'];
-        $data['role'] = $_POST['role'];
-
-        $this->model->create($data);
-        header('Location: ' . URL . 'user');
-    }
-
         public function edit($id)
     {
         $this->view->user = $this->model->userSingleList($id);

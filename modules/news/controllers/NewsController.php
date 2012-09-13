@@ -13,6 +13,13 @@ class NewsController extends Controller
         $this->view->render('news/index');
     }
 
+    function logout()
+    {
+        Session::destroy();
+        header('location: '.URL.'login');
+        exit;
+    }
+
     function create()
     {
         $this->model->create();

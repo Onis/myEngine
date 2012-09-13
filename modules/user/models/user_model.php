@@ -6,38 +6,30 @@ class User_Model extends Model
     {
         parent::__construct();
         $this->createTableUser();
+        Database::setTable('user');
     }
 
     public function createTableUser()
     {
-        $sql = "CREATE TABLE IF NOT EXISTS user
-                (id SERIAL,
-                login VARCHAR(50),
-                password VARCHAR(50),
-                role ENUM('default','admin','owner') NOT NULL DEFAULT  'default'
-                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-        $sth = $this->db->prepare($sql);
-        $sth->execute();
+        Database::createTable('user', array(
+            'id'=>'Serial',
+            'login'=>'VARCHAR(50)',
+            'password'=>'VARCHAR(50)',
+            'role'=>"ENUM('default','admin','owner') NOT NULL DEFAULT  'default'")
+        );
 
     }
 
     public function userList()
     {
-        return $this->db->select('SELECT id, login, role FROM user');
+        Database::select('id, login, role');
+        return Database::getResult();
     }
 
     public function userSingleList($id)
     {
-        return $this->db->select('SELECT id, login, role FROM user WHERE id = :id',array(':id' => $id));
-    }
-
-    public function create($data)
-    {
-        $this->db->insert('user', array(
-            'login' => $data['login'],
-            'password' => Hash::create('md5', $data['password'], HASH_PASSWORD_KEY),
-            'role' => $data['role']
-        ));
+        Database::select('id, login, role', array('id'=>$id));
+        return Database::getResult();
     }
 
     public function editSave($data)
@@ -47,16 +39,17 @@ class User_Model extends Model
             'password' => Hash::create('md5', $data['password'], HASH_PASSWORD_KEY),
             'role' => $data['role']
         );
-        $this->db->update('user', $postData, "`id` = {$data['id']}");
+        Database::update($postData, array('id'=>"{$data['id']}"));
     }
 
     public function delete($id)
     {
-        $result = $this->db->select('SELECT role FROM user WHERE id = :id',array(':id' => $id));
+        Database::select("'id', 'login', 'role'", array('id'=>$id));
+        $result = Database::getResult();
         if ($result[0]['role'] == 'owner') {
             return false;
         }
 
-        $this->db->delete('user', "id = $id");
+        Database::delete(array('id'=>$id));
     }
 }

@@ -1,10 +1,9 @@
 <?php
 
 return array(
-'#^news/?$#',
-'#^news/index/?$#',
-'#^news/create/?$#',
-'#^news/logout/?$#',
+'#^login/?$#',
+'#^login/index/?$#',
+'#^login/run/?$#',
 '#^news/edit/(\d+)/?$#',
 '#^news/delete/(\d+)/?$#',
     );

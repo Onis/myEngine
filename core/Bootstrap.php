@@ -34,7 +34,7 @@ class Bootstrap
         require LIBS . 'Database.php';
         require LIBS . 'Hash.php';
         require LIBS . 'Session.php';
-
+        require LIBS . 'Validation.php';
         //require '';
     }
 

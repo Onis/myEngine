@@ -6,6 +6,7 @@ class News_Model extends Model
     {
         parent::__construct();
         $this->createTableNews();
+        Database::setTable('data');
 
     }
 
@@ -15,23 +16,23 @@ class News_Model extends Model
                 (id serial,
                 text varchar(255)
                 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-        $sth = $this->db->prepare($sql);
-        $sth->execute();
+        Database::exeQuery($sql);
     }
 
     function create()
     {
         $text = $_POST['text'];
-        $this->db->insert('data', array('text' => $text));
+        Database::insert(array('text' => $text));
     }
 
     function select()
     {
-        return $this->db->select('SELECT * FROM data;');
+        Database::select('*');
+        return Database::getResult();
     }
 
     function delete($id)
     {
-        $this->db->delete('data', "id = $id");
+        Database::delete(array('id'=>$id));
     }
 }

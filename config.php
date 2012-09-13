@@ -19,5 +19,6 @@ define('HASH_PASSWORD_KEY', 'catsFlyHigh2000miles');
 return array(
     'user',
     'news',
-    'title',
+    'login',
+    'registration',
 );
