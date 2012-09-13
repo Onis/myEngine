@@ -17,7 +17,6 @@ class Login_Model extends Model
 
         $count = Database::getNumRows();
         if ($count > 0) {
-            //login
             Session::init();
             Session::set('role', $data['role']);
             Session::set('loggedIn', true);

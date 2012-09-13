@@ -4,7 +4,7 @@
  *
  * @author Sultanov Damir <damir.s94777@gmail.com>
  */
-class validation
+class Validation
 {
     /**
      * Проверка на латинский алфавит

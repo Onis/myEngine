@@ -5,19 +5,7 @@ class User_Model extends Model
     public function __construct()
     {
         parent::__construct();
-        $this->createTableUser();
         Database::setTable('user');
-    }
-
-    public function createTableUser()
-    {
-        Database::createTable('user', array(
-            'id'=>'Serial',
-            'login'=>'VARCHAR(50)',
-            'password'=>'VARCHAR(50)',
-            'role'=>"ENUM('default','admin','owner') NOT NULL DEFAULT  'default'")
-        );
-
     }
 
     public function userList()
@@ -44,12 +32,11 @@ class User_Model extends Model
 
     public function delete($id)
     {
-        Database::select("'id', 'login', 'role'", array('id'=>$id));
+        Database::select('role', array('id'=>$id));
         $result = Database::getResult();
         if ($result[0]['role'] == 'owner') {
             return false;
         }
-
         Database::delete(array('id'=>$id));
     }
 }
