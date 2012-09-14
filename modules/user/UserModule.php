@@ -6,14 +6,17 @@ class UserModule extends Module
     {
         parent::__construct();
 
-        $this->loadModel();
+        $this->loadController('user', $this->url[0]);
 
+        $this->loadModel('user', $this->url[0]);
+
+        var_dump($this->url);
         if (empty($this->url[1])) {
             $this->loadIndexMethod();
             return false;
         }
 
-        if(isset($this->url[1])) {
+        if(isset($this->url[2])) {
             $this->loadMethods(true);
         } else {
             if(isset($this->url[1])) {

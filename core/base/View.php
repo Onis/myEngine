@@ -11,17 +11,11 @@ class View
     /**
      * @param string $name
      */
-    public function render($name, $noInclude = false)
+    public function render($name)
     {
         $name = explode('/', $name);
-        if ($noInclude == true) {
-            require MODULES . $name[0] . '/views/' . $name[1]. '.php';
-        } else {
-            require 'views/header.php';
-            require MODULES . $name[0] . '/views/' . $name[1]. '.php';
-            require 'views/footer.php';
-        }
-
-
+        require 'views/header.php';
+        require MODULES . $name[0] . '/views/' . $name[1]. '.php';
+        require 'views/footer.php';
     }
 }

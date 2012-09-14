@@ -11,14 +11,22 @@ class Controller
     /**
      * @param string $name
      */
-    public function loadModel($name)
+    public function loadModel($name, $model = false)
     {
-        $path = MODULES . $name . '/models/' . $name . '_model.php';
+        if($model == false) {
+            $path = MODULES . $name . '/models/' . $name . '_model.php';
+        } else {
+            $path = MODULES . $name . '/models/' . $model . '_model.php';
+        }
         if (file_exists($path)) {
             require $path;
-            $modelName = $name . '_model';
+            if($model == false){
+                $modelName = $name . '_model';
+            } else {
+                $modelName = $model . '_model';
+            }
             $this->model = new $modelName;
+            echo '<br>'.$modelName;
         }
-
     }
 }

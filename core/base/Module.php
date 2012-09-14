@@ -8,16 +8,25 @@ class Module
     public function __construct()
     {
         $this->getURL();
-        $this->loadController($this->url[0]);
     }
 
-    public function loadController($name)
+    public function loadController($name, $controller = false)
     {
-        $path = MODULES . $name . '/controllers/' . $name . 'Controller.php';
+        if($controller == false) {
+            $path = MODULES . $name . '/controllers/' . $name . 'Controller.php';
+        } else {
+            $path = MODULES . $name . '/controllers/' . $controller . 'Controller.php';
+        }
         if (file_exists($path)) {
             require $path;
-            $controllerName = $name . 'Controller';
+            if($controller == false) {
+                $controllerName = $name . 'Controller';
+            } else {
+                $controllerName = $controller . 'Controller';
+            }
+
             $this->controller = new $controllerName;
+            echo $controllerName;
         }
     }
 
@@ -30,9 +39,9 @@ class Module
         $this->url = $url;
     }
 
-    public function loadModel()
+    public function loadModel($module, $model = false)
     {
-        $this->controller->loadModel($this->url[0]);
+        $this->controller->loadModel($module, $model);
     }
 
     public function loadMethods($param = false)

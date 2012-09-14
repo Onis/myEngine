@@ -6,7 +6,8 @@ class NewsModule extends Module
     {
         parent::__construct();
 
-        $this->loadModel();
+        $this->loadController($this->url[0]);
+        $this->loadModel($this->url[0]);
 
         if (empty($this->url[1])) {
             $this->loadIndexMethod();
