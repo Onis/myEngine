@@ -24,17 +24,17 @@ class Bootstrap
     {
         $this->_config = require 'config.php';
 
-        require CORE . 'ModuleManager.php';
+        require 'core/ModuleManager.php';
 
-        require BASE . 'Controller.php';
-        require BASE . 'Model.php';
-        require BASE . 'View.php';
-        require BASE . 'Module.php';
+        require 'core/base/Controller.php';
+        require 'core/base/Model.php';
+        require 'core/base/View.php';
+        require 'core/base/Module.php';
 
-        require LIBS . 'Database.php';
-        require LIBS . 'Hash.php';
-        require LIBS . 'Session.php';
-        require LIBS . 'Validation.php';
+        require 'libs/Database.php';
+        require 'libs/Hash.php';
+        require 'libs/Session.php';
+        require 'libs/Validation.php';
         //require '';
     }
 

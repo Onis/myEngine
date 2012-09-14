@@ -7,4 +7,11 @@ return array(
     '#^user/edit/(\d+)/?$#',
     '#^user/editSave/(\d+)/?$#',
     '#^user/delete/(\d+)/?$#',
+    '#^login/?$#',
+    '#^login/index/?$#',
+    '#^login/run/?$#',
+    '#^registration/?$#',
+    '#^registration/index/?$#',
+    '#^registration/create/?$#',
+
     );

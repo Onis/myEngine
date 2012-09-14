@@ -17,9 +17,9 @@ class View
         if ($noInclude == true) {
             require MODULES . $name[0] . '/views/' . $name[1]. '.php';
         } else {
-            require VIEWS . 'header.php';
+            require 'views/header.php';
             require MODULES . $name[0] . '/views/' . $name[1]. '.php';
-            require VIEWS . 'footer.php';
+            require 'views/footer.php';
         }
 
 
