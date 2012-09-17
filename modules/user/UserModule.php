@@ -7,10 +7,7 @@ class UserModule extends Module
         parent::__construct();
 
         $this->loadController('user', $this->url[0]);
-
         $this->loadModel('user', $this->url[0]);
-
-        var_dump($this->url);
         if (empty($this->url[1])) {
             $this->loadIndexMethod();
             return false;

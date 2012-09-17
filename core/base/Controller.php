@@ -26,7 +26,6 @@ class Controller
                 $modelName = $model . '_model';
             }
             $this->model = new $modelName;
-            echo '<br>'.$modelName;
         }
     }
 }

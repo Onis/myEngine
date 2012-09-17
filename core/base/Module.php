@@ -26,7 +26,6 @@ class Module
             }
 
             $this->controller = new $controllerName;
-            echo $controllerName;
         }
     }
 

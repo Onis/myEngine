@@ -48,3 +48,13 @@ $this->db->insert('user', array(
                 'login'=>'owner',
                 'password'=>'2abf1b7fbe37115824186a1684d8bfe5',
                 'role'=>'owner'));
+
+
+CREATE TABLE IF NOT EXISTS test
+( `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `theme` varchar(255) NOT NULL,
+  `question` longtext,
+  `correct_answer` text NOT NULL,
+  `incorrect_answers` longtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

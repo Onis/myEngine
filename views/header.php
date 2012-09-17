@@ -18,6 +18,7 @@
                         <li><a href="<?php echo URL; ?>news">Новости</a></li>
                         <li><a href="<?php echo URL; ?>user">Пользователи</a></li>
                         <li><a href="<?php echo URL; ?>login">Вход</a></li>
+                        <li><a href="<?php echo URL; ?>test">Тест</a></li>
                     </ul>
                 </div>
             </div>
