@@ -10,19 +10,19 @@ class Module
         $this->getURL();
     }
 
-    public function loadController($name, $controller = false)
+    public function loadController($name, $controllers = false)
     {
-        if($controller == false) {
+        if($controllers == false) {
             $path = MODULES . $name . '/controllers/' . $name . 'Controller.php';
         } else {
-            $path = MODULES . $name . '/controllers/' . $controller . 'Controller.php';
+            $path = MODULES . $name . '/controllers/' . $controllers . 'Controller.php';
         }
         if (file_exists($path)) {
             require $path;
-            if($controller == false) {
+            if($controllers == false) {
                 $controllerName = $name . 'Controller';
             } else {
-                $controllerName = $controller . 'Controller';
+                $controllerName = $controllers . 'Controller';
             }
 
             $this->controller = new $controllerName;
@@ -59,6 +59,24 @@ class Module
     public function loadIndexMethod()
     {
         $this->controller->index();
+    }
+
+    public function bootstrapping()
+    {
+        if (empty($this->url[1])) {
+            $this->loadIndexMethod();
+            return false;
+        }
+
+        if(isset($this->url[2])) {
+            $this->loadMethods(true);
+        } else {
+            if(isset($this->url[1])) {
+                $this->loadMethods();
+            } else {
+                $this->loadIndexMethod();
+            }
+        }
     }
 
 
