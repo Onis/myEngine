@@ -2,27 +2,31 @@
 
 class Bootstrap
 {
-    public $_config;
+    public static $db;
 
-    public function __construct()
+    /**
+     *
+     */
+    function __construct()
     {
         $this->requireAllFiles();
         if(empty($_GET['url']) || $_GET['url'] == 'index') {
             ModuleManager::loadModule('index');
-
         } else {
             if($this->handlerURL($_GET['url'])) {
                 ModuleManager::loadModule('error');
             }
-
         }
-
-
     }
 
-    public function requireAllFiles()
+    /**
+     * Загружает все требуемые файлы
+     */
+    function requireAllFiles()
     {
         $this->_config = require 'config.php';
+        $this->modules = $this->_config['Modules'];
+        self::$db = $this->_config['DB'];
 
         require 'core/ModuleManager.php';
 
@@ -35,13 +39,17 @@ class Bootstrap
         require 'libs/Hash.php';
         require 'libs/Session.php';
         require 'libs/Validation.php';
-        //require '';
     }
 
-
-    public function handlerURL($url)
+    /**
+     * Получает URL и сверяет его с массивом заданных URL, если есть совпадение
+     * загружает тот или иной модуль, если совпадения нет загружает модуль error
+     * @param $url URL с адресной строки
+     * @return bool
+     */
+    function handlerURL($url)
     {
-        ModuleManager::collectorURL($this->_config);
+        ModuleManager::collectorURL($this->modules);
         $models = ModuleManager::$_modules;
         foreach ($models as $key1 => $value1 ) {
             foreach ($value1 as $value2) {

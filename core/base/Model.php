@@ -4,7 +4,7 @@ class Model
 {
     public function __construct()
     {
-        Database::connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        Database::connect(Bootstrap::$db['host'], Bootstrap::$db['user'], Bootstrap::$db['pass'], Bootstrap::$db['dbname']);
         Database::setCharSet('utf8');
     }
 }

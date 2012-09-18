@@ -7,23 +7,33 @@ class TestController extends Controller
         parent::__construct();
     }
 
+    /**
+     * Переходит на index вьюху и выводит содержимое вопросов
+     */
     function index()
     {
         $this->view->testList = $this->model->select();
         $this->view->render('test/index');
     }
 
+    /**
+     * Создание вопроса
+     */
     function createQuestion()
     {
-        $data = array();
-        $data['theme'] = $_POST['theme'];
-        $data['question'] = $_POST['question'];
-        $data['correct_answer'] = $_POST['correct_answer'];
-        $data['incorrect_answers'] = $_POST['incorrect_answers'];
+        $data = array(
+            'theme' => $_POST['theme'],
+            'question' => $_POST['question'],
+            'correct_answer' => $_POST['correct_answer'],
+            'incorrect_answers' => $_POST['incorrect_answers']
+        );
         $this->model->create($data);
         header('Location: ' . URL . 'test');
     }
 
+    /**
+     * Переход на create вьюху
+     */
     function create()
     {
         $this->view->render('test/create');
