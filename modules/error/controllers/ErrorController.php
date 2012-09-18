@@ -7,6 +7,9 @@ class ErrorController extends Controller
         parent::__construct();
     }
 
+    /**
+     * Загружает вьюху index и выдает сообщение
+     */
     function index()
     {
         $this->view->msg = 'This is Module Error!!';

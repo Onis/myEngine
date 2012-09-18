@@ -2,7 +2,13 @@
 
 class Module
 {
+    /**
+     * @var имя загружаеммого контроллера
+     */
     public $controller;
+    /**
+     * @var полученный url
+     */
     public $url;
 
     public function __construct()
@@ -10,6 +16,13 @@ class Module
         $this->getURL();
     }
 
+    /**
+     * Загрузка контроллера, второй параметр говорит о нескольких контроллерах
+     * в одном модуле
+     * @param string $name имя модуля и контроллера, если не изменно
+     * @param bool $controllers имя контроллера
+     * return string имя загружаемого контроллера
+     */
     public function loadController($name, $controllers = false)
     {
         if($controllers == false) {
@@ -26,9 +39,15 @@ class Module
             }
 
             $this->controller = new $controllerName;
+        } else {
+            throw new Exception('Incorrect file directory: '.$path.'. Controller not load!!');
         }
     }
 
+    /**
+     * Получает url
+     * return Полученный url
+     */
     public function getURL()
     {
         $url = isset($_GET['url']) ? $_GET['url'] : null;
@@ -38,11 +57,21 @@ class Module
         $this->url = $url;
     }
 
+    /**
+     * Загрузка модели
+     * @param string $module
+     * @param bool $model
+     */
     public function loadModel($module, $model = false)
     {
         $this->controller->loadModel($module, $model);
     }
 
+    /**
+     * Загрузка методов
+     * @param bool $param есть ли параметр у данного метода
+     * @throws Exception
+     */
     public function loadMethods($param = false)
     {
         if (method_exists($this->controller, $this->url[1])) {
@@ -56,11 +85,18 @@ class Module
         }
     }
 
+    /**
+     * Загрузка метода index
+     */
     public function loadIndexMethod()
     {
         $this->controller->index();
     }
 
+    /**
+     * Самонастройка загрузки методов
+     * @return bool
+     */
     public function bootstrapping()
     {
         if (empty($this->url[1])) {

@@ -9,6 +9,7 @@ class View
     public function __construct() {}
 
     /**
+     * Осуществляет загрузку вьюхи
      * @param string $name
      */
     public function render($name)

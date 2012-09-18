@@ -2,17 +2,17 @@
 
 class LoginController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function index()
+    public function index()
     {
         $this->view->render('user/login');
     }
 
-    function run()
+    public function run()
     {
         $this->model->run();
     }

@@ -7,12 +7,18 @@ class NewsController extends Controller
         parent::__construct();
     }
 
+    /**
+     * Загружает вьюху index этого модуля и делает выборку всех данных
+     */
     function index()
     {
         $this->view->newsList = $this->model->select();
         $this->view->render('news/index');
     }
 
+    /**
+     * Закрывает начатую сессию
+     */
     function logout()
     {
         Session::destroy();
@@ -20,6 +26,9 @@ class NewsController extends Controller
         exit;
     }
 
+    /**
+     * Создает новость
+     */
     function create()
     {
         $this->model->create();
@@ -27,11 +36,18 @@ class NewsController extends Controller
 
     }
 
+    /**
+     * Осуществляет выборку
+     */
     function select()
     {
         $this->model->xhrGetListings();
     }
 
+    /**
+     * Удаление по id
+     * @param int $id
+     */
     public function delete($id)
     {
         $this->model->delete($id);

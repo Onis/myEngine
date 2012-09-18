@@ -9,7 +9,9 @@ class Controller
     }
 
     /**
-     * @param string $name
+     * Загрузка модели
+     * @param string $name имя модуля и модели, если не изменно
+     * @param bool $model Имя модели
      */
     public function loadModel($name, $model = false)
     {
@@ -26,6 +28,8 @@ class Controller
                 $modelName = $model . '_model';
             }
             $this->model = new $modelName;
+        } else {
+            throw new Exception('Incorrect file directory: '.$path.'. Model not load!!');
         }
     }
 }

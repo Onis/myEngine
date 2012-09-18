@@ -7,20 +7,20 @@ class UserController extends Controller
         parent::__construct();
     }
 
-        public function index()
+    public function index()
     {
         $this->view->userList = $this->model->userList();
         $this->view->render('user/index');
     }
 
-        public function edit($id)
+    public function edit($id)
     {
         $this->view->user = $this->model->userSingleList($id);
         $this->view->render('user/edit');
 
     }
 
-        public function editSave($id)
+    public function editSave($id)
     {
         $data = array();
         $data['id'] = $id;

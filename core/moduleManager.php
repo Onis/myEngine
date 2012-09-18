@@ -8,11 +8,11 @@ class ModuleManager
 
     }
 
-    static $_modules = array();
+    public static $_modules = array();
 
-     /**
-     * Подключение модуля, находящегося в системе
-     * @param string $modName Имя подключаемого модуля
+    /**
+     * Подключение модуля
+     * @param string $module_name имя подключаемого модуля
      */
     public static function loadModule ($module_name)
     {
@@ -22,14 +22,14 @@ class ModuleManager
             include_once($module_path);
             $moduleName = $module_name . 'Module';
             $module = new $moduleName;
-            //return $module;
         }
     }
 
 
     /**
+     * Соберает все доступные url в один массив
      * @static
-     * @param array $module_names
+     * @param array $module_names имена доступных модулей
      */
     public static function collectorURL($module_names)
     {
