@@ -32,4 +32,9 @@ class Controller
             throw new Exception('Incorrect file directory: '.$path.'. Model not load!!');
         }
     }
+
+    public function render($name)
+    {
+        $this->view->render($name);
+    }
 }

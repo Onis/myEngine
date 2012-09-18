@@ -12,8 +12,10 @@ class NewsController extends Controller
      */
     function index()
     {
-        $this->view->newsList = $this->model->select();
-        $this->view->render('news/index');
+        $newsList = $this->model->select();
+        Bootstrap::$smarty->assign('newsList', $newsList);
+        $this->view->render('index');
+
     }
 
     /**
@@ -34,14 +36,6 @@ class NewsController extends Controller
         $this->model->create();
         header('Location: ' . URL . 'news');
 
-    }
-
-    /**
-     * Осуществляет выборку
-     */
-    function select()
-    {
-        $this->model->xhrGetListings();
     }
 
     /**

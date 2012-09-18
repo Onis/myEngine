@@ -14,9 +14,9 @@ class View
      */
     public function render($name)
     {
-        $name = explode('/', $name);
         require 'views/header.php';
-        require MODULES . $name[0] . '/views/' . $name[1]. '.php';
+        $path = 'modules/'.ModuleManager::$module.'/views/' . $name. '.tpl';
+        Bootstrap::$smarty->display($path);
         require 'views/footer.php';
     }
 }

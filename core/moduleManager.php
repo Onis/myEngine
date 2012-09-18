@@ -9,6 +9,7 @@ class ModuleManager
     }
 
     public static $_modules = array();
+    public static $module;
 
     /**
      * Подключение модуля
@@ -20,6 +21,7 @@ class ModuleManager
         if (file_exists($module_path))
         {
             include_once($module_path);
+            self::$module = $module_name;
             $moduleName = $module_name . 'Module';
             $module = new $moduleName;
         }

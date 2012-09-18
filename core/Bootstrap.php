@@ -3,6 +3,7 @@
 class Bootstrap
 {
     public static $db;
+    public static $smarty;
 
     /**
      *
@@ -10,6 +11,7 @@ class Bootstrap
     function __construct()
     {
         $this->requireAllFiles();
+        $this->loadSmarty();
         if(empty($_GET['url']) || $_GET['url'] == 'index') {
             ModuleManager::loadModule('index');
         } else {
@@ -24,21 +26,31 @@ class Bootstrap
      */
     function requireAllFiles()
     {
-        $this->_config = require 'config.php';
+        $this->_config = include 'config.php';
         $this->modules = $this->_config['Modules'];
         self::$db = $this->_config['DB'];
 
-        require 'core/ModuleManager.php';
+        include 'core/ModuleManager.php';
 
-        require 'core/base/Controller.php';
-        require 'core/base/Model.php';
-        require 'core/base/View.php';
-        require 'core/base/Module.php';
+        include 'core/base/Controller.php';
+        include 'core/base/Model.php';
+        include 'core/base/View.php';
+        include 'core/base/Module.php';
 
-        require 'libs/Database.php';
-        require 'libs/Hash.php';
-        require 'libs/Session.php';
-        require 'libs/Validation.php';
+        include 'libs/Database.php';
+        include 'libs/Hash.php';
+        include 'libs/Session.php';
+        include 'libs/Validation.php';
+        include 'libs/Smarty/Smarty.class.php';
+    }
+
+    function loadSmarty()
+    {
+        $smarty = new Smarty();
+
+        $smarty->caching = true;
+        $smarty->cache_lifetime = 300;
+        self::$smarty = $smarty;
     }
 
     /**
