@@ -15,9 +15,9 @@ class View
     public function render($name)
     {
         $path = 'modules/'.ModuleManager::$module.'/views/' . $name. '.tpl';
-        require 'views/header.tpl';
+        $this->smarty->display('views/header.tpl');
         $this->smarty->display($path);
-        require 'views/footer.tpl';
+        $this->smarty->display('views/footer.tpl');
     }
 
     /**
