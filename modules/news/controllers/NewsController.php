@@ -14,7 +14,7 @@ class NewsController extends Controller
     {
         $newsList = $this->model->select();
         $this->assign(array('newsList'=>$newsList));
-        $this->view->render('index');
+        $this->render('index');
 
     }
 

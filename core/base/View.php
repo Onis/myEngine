@@ -3,9 +3,7 @@
 class View
 {
     public $smarty;
-    /**
-     *
-     */
+
     public function __construct() {
         $this->loadSmarty();
     }
@@ -22,6 +20,9 @@ class View
         require 'views/footer.tpl';
     }
 
+    /**
+     * Загрузка шаблонизатора смарти
+     */
     public function loadSmarty()
     {
         $this->smarty = new Smarty();

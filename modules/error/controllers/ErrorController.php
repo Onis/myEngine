@@ -12,7 +12,7 @@ class ErrorController extends Controller
      */
     function index()
     {
-        $this->view->msg = 'This is Module Error!!';
-        $this->view->render('error/index');
+        $this->assign(array('msg' => 'This is Module Error!!'));
+        $this->render('index');
     }
 }

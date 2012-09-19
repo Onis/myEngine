@@ -8,7 +8,7 @@ class RegistrationController extends Controller
 
     public function index()
     {
-        $this->view->render('user/registration');
+        $this->render('registration');
     }
 
     public function create()

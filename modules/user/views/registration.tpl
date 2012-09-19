@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="<?php echo URL; ?>registration/create" method="post">
+<form class="form-horizontal" action="{$smarty.const.URL}registration/create" method="post">
     <fieldset>
         <legend>Создание пользователя</legend>
         <input type="text" name="login" placeholder="Логин"><br />

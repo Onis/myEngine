@@ -9,7 +9,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        $this->view->render('user/login');
+        $this->render('login');
     }
 
     public function run()

@@ -9,24 +9,25 @@ class UserController extends Controller
 
     public function index()
     {
-        $this->view->userList = $this->model->userList();
-        $this->view->render('user/index');
+        $this->assign(array('userList' => $this->model->userList()));
+        $this->render('index');
     }
 
     public function edit($id)
     {
-        $this->view->user = $this->model->userSingleList($id);
-        $this->view->render('user/edit');
+        $this->assign(array('user' => $this->model->userSingleList($id)));
+        $this->render('edit');
 
     }
 
     public function editSave($id)
     {
-        $data = array();
-        $data['id'] = $id;
-        $data['login'] = $_POST['login'];
-        $data['password'] = $_POST['password'];
-        $data['role'] = $_POST['role'];
+        $data = array(
+            'id' => $id,
+            'login' => $_POST['login'],
+            'password' => $_POST['password'],
+            'role' => $_POST['role']
+        );
 
         $this->model->editSave($data);
         header('Location: ' . URL . 'user');
