@@ -22,15 +22,14 @@ class UserController extends Controller
 
     public function editSave($id)
     {
-        $data = array(
-            'id' => $id,
-            'login' => $_POST['login'],
-            'password' => $_POST['password'],
-            'role' => $_POST['role']
-        );
+        $this->model->editSave($id);
+        if($this->model->check()) {
+            header('Location: ' . URL . 'user');
+        } else {
+            header('Location: ' . URL . 'user/edit/'.$id);
+        }
 
-        $this->model->editSave($data);
-        header('Location: ' . URL . 'user');
+
     }
 
     public function delete($id)

@@ -10,15 +10,9 @@ class Login_Model extends Model
 
     public function run()
     {
-        $this->checkValidation('login', $_POST['login']);
-        $this->checkValidation('password', $_POST['password']);
-        if ($this->msg) {
-            echo $this->msg;
-            return false;
-        }
-
-        $login = $_POST['login'];
-        $password = Hash::create('md5', $_POST['password'], HASH_PASSWORD_KEY);
+        $login = $this->checkValidation('login', $_POST['login']);
+        $password = Hash::create('md5', $this->checkValidation('password', $_POST['password']),HASH_PASSWORD_KEY);
+        $this->check();
         Database::select("'id', 'role'", array('login'=>$login, 'password'=>$password), 'and');
         $data = Database::getResult();
 

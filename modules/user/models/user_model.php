@@ -20,14 +20,19 @@ class User_Model extends Model
         return Database::getResult();
     }
 
-    public function editSave($data)
+    public function editSave($id)
     {
+        $login = $this->checkValidation('login', $_POST['login']);
+        $password = $this->checkValidation('password', $_POST['password']);
+        if($this->check() === false){
+            return false;
+        };
         $postData = array(
-            'login' => $data['login'],
-            'password' => Hash::create('md5', $data['password'], HASH_PASSWORD_KEY),
-            'role' => $data['role']
+            'login' => $login,
+            'password' => Hash::create('md5', $password, HASH_PASSWORD_KEY),
+            'role' => $_POST['role']
         );
-        Database::update($postData, array('id'=>"{$data['id']}"));
+        Database::update($postData, array('id'=>"{$id}"));
     }
 
     public function delete($id)

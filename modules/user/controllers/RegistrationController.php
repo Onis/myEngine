@@ -13,17 +13,12 @@ class RegistrationController extends Controller
 
     public function create()
     {
-        if(Validation::isLogin($_POST['login']) == false || Validation::isPassword($_POST['password']) == false) {
+        $this->model->create();
+        if($this->model->check()) {
+            header('Location: ' . URL . 'user');
+        } else {
             header('Location: ' . URL . 'registration');
-            return false;
         }
-        $data = array(
-            'login' => $_POST['login'],
-            'password' => $_POST['password'],
-            'role' => $_POST['role']
-        );
-        $this->model->create($data);
-        header('Location: ' . URL . 'user');
 
     }
 }

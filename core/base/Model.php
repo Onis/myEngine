@@ -2,7 +2,8 @@
 
 class Model
 {
-    public $msg= '';
+    public $msg = false;
+    public $error = 0;
     public function __construct()
     {
         Database::connect(Bootstrap::$db['host'], Bootstrap::$db['user'], Bootstrap::$db['pass'], Bootstrap::$db['dbname'], Bootstrap::$db['charset']);
@@ -22,6 +23,7 @@ class Model
     {
         $validate = 'is'.$validateName;
         if(Validation::$validate($value) == false){
+            $this->error = 1;
             $this->msg .= '<h5>Incorrect data is entered in the field for ' . $validateName . '</h5>';
             return false;
         };
@@ -30,9 +32,18 @@ class Model
 
     public function filter($value) {
         if(empty($value)) {
+            $this->error = 1;
             $this->msg = '<h3>Complete all fields!!!!</h3>';
             return false;
         }
-        Validation::filter($value);
+        return Validation::filter($value);
+    }
+
+    public function check()
+    {
+        if ($this->error === 1) {
+            return false;
+        }
+        return true;
     }
 }

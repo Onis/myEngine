@@ -21,14 +21,14 @@ class TestController extends Controller
      */
     function createQuestion()
     {
-        $data = array(
-            'theme' => $_POST['theme'],
-            'question' => $_POST['question'],
-            'correct_answer' => $_POST['correct_answer'],
-            'incorrect_answers' => $_POST['incorrect_answers']
-        );
-        $this->model->create($data);
-        header('Location: ' . URL . 'test');
+
+        $this->model->create();
+        if($this->model->check()) {
+            header('Location: ' . URL . 'test');
+        } else {
+            header('Location: ' . URL . 'test/create');
+        }
+
     }
 
     /**

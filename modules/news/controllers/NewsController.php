@@ -34,17 +34,9 @@ class NewsController extends Controller
      */
     function createNews()
     {
-
-        if(empty($_POST['title']) && empty($_POST['text'])) {
+        ($this->model->create()) ?
+            header('Location: ' . URL . 'news') :
             header('Location: ' . URL . 'news/create');
-            return false;
-        }
-        $data = array(
-            'title' => Validation::filter($_POST['title']),
-            'text' => Validation::filter($_POST['text'])
-        );
-        $this->model->create($data);
-        header('Location: ' . URL . 'news');
     }
 
     public function create()

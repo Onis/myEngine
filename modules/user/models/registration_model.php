@@ -8,12 +8,19 @@ class Registration_Model extends Model
         Database::setTable('user');
     }
 
-    public function create($data)
+    public function create()
     {
-        Database::insert(array(
-            'login' => $data['login'],
-            'password' => Hash::create('md5', $data['password'], HASH_PASSWORD_KEY),
-            'role' => $data['role']
-        ));
+        $login = $this->checkValidation('login', $_POST['login']);
+        $password = $this->checkValidation('password', $_POST['password']);
+        if($this->check() === false){
+            return false;
+        };
+
+        $postData = array(
+            'login' => $login,
+            'password' => Hash::create('md5', $password, HASH_PASSWORD_KEY),
+            'role' => $_POST['role']
+        );
+        Database::insert($postData);
     }
 }

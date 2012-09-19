@@ -12,12 +12,19 @@ class Test_Model extends Model
      * Вставка данных
      * @param array $data массив с данными
      */
-    function create($data)
+    function create()
     {
-        $postData = array('theme' => $data['theme'],
-            'question' => $data['question'],
-            'correct_answer' => $data['correct_answer'],
-            'incorrect_answers' => $data['incorrect_answers']);
+        $theme = $this->filter($_POST['theme']);
+        $question = $this->filter($_POST['question']);
+        $correct_answer = $this->filter($_POST['correct_answer']);
+        $incorrect_answers = $this->filter($_POST['incorrect_answers']);
+        if($this->check() === false){
+            return false;
+        };
+        $postData = array('theme' => $theme,
+            'question' => $question,
+            'correct_answer' => $correct_answer,
+            'incorrect_answers' => $incorrect_answers);
         Database::insert($postData);
     }
 
