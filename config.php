@@ -1,5 +1,4 @@
 <?php
-define('MODULES', dirname(__FILE__) . '/modules/');
 
 define('URL', 'http://localhost/MyEngine/');
 define('HASH_GENERAL_KEY', 'MixUp200');
@@ -13,6 +12,7 @@ return array(
         'user' => 'root',
         'pass' => '123',
         'dbname' => 'mvc',
+        'charset' => 'utf8',
     ),
     'Modules' => array(
         'user',

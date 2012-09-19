@@ -64,12 +64,13 @@ class Database
      * @param $db_name string имя базы данных
      * @throws Exception
      */
-    public static function connect($host, $user, $password, $db_name)
+    public static function connect($host, $user, $password, $db_name, $charset)
     {
         self::$link = new mysqli($host, $user, $password, $db_name);
         if (self::$link->connect_error) {
             throw new Exception(get_class() . ': Could not connect: ' . self::$link->connect_error);
         }
+        self::setCharSet($charset);
         return self::$link;
     }
 

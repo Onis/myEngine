@@ -10,34 +10,32 @@ class Controller
 
     /**
      * Загрузка модели
-     * @param string $name имя модуля и модели, если не изменно
-     * @param bool $model Имя модели
+     * @param string $model имя загружаемой модели
+     * @throws Exception
      */
-    public function loadModel($name, $model = false)
+    public function loadModel($model)
     {
-        if($model == false) {
-            $path = MODULES . $name . '/models/' . $name . '_model.php';
-        } else {
-            $path = MODULES . $name . '/models/' . $model . '_model.php';
-        }
+        $path = 'modules/' . ModuleManager::$module . '/models/' . $model . '_model.php';
         if (file_exists($path)) {
             require $path;
-            if($model == false){
-                $modelName = $name . '_model';
-            } else {
-                $modelName = $model . '_model';
-            }
+            $modelName = $model . '_model';
             $this->model = new $modelName;
         } else {
             throw new Exception('Incorrect file directory: '.$path.'. Model not load!!');
         }
     }
 
+    /**
+     * @param string $name
+     */
     public function render($name)
     {
         $this->view->render($name);
     }
 
+    /**
+     * @param array $data
+     */
     public function assign($data)
     {
         foreach($data as $key=>$value) {

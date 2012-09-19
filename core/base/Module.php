@@ -14,30 +14,22 @@ class Module
     public function __construct()
     {
         $this->getURL();
+        $this->loadController($this->url[0]);
+        $this->loadModel($this->url[0]);
+        $this->bootstrapping();
     }
 
     /**
-     * Загрузка контроллера, второй параметр говорит о нескольких контроллерах
-     * в одном модуле
-     * @param string $name имя модуля и контроллера, если не изменно
-     * @param bool $controllers имя контроллера
-     * return string имя загружаемого контроллера
+     * Загрузка контроллера
+     * @param string $controller имя загружаемого контроллера
+     * @throws Exception
      */
-    public function loadController($name, $controllers = false)
+    public function loadController($controller)
     {
-        if($controllers == false) {
-            $path = MODULES . $name . '/controllers/' . $name . 'Controller.php';
-        } else {
-            $path = MODULES . $name . '/controllers/' . $controllers . 'Controller.php';
-        }
+        $path = 'modules/' . ModuleManager::$module . '/controllers/' . $controller . 'Controller.php';
         if (file_exists($path)) {
-            require $path;
-            if($controllers == false) {
-                $controllerName = $name . 'Controller';
-            } else {
-                $controllerName = $controllers . 'Controller';
-            }
-
+            include $path;
+            $controllerName = $controller . 'Controller';
             $this->controller = new $controllerName;
         } else {
             throw new Exception('Incorrect file directory: '.$path.'. Controller not load!!');
@@ -58,13 +50,11 @@ class Module
     }
 
     /**
-     * Загрузка модели
-     * @param string $module
-     * @param bool $model
+     * @param string $model
      */
-    public function loadModel($module, $model = false)
+    public function loadModel($model)
     {
-        $this->controller->loadModel($module, $model);
+        $this->controller->loadModel($model);
     }
 
     /**
