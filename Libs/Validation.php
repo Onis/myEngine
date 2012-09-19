@@ -100,7 +100,7 @@ class Validation
      */
     public static function isLogin($str)
     {
-        return (validation::filter(validation::isRomanAlphabet(validation::range($str, 3, 30)))) ? $str : FALSE;
+        return (validation::isRomanAlphabet(validation::range($str, 3, 30))) ? $str : FALSE;
     }
 
     /**

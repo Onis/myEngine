@@ -11,10 +11,9 @@ class News_Model extends Model
     /**
      * insert
      */
-    function create()
+    function create($data)
     {
-        $text = $_POST['text'];
-        Database::insert(array('text' => $text));
+        Database::insert($data);
     }
 
     /**

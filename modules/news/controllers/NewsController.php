@@ -2,6 +2,7 @@
 
 class NewsController extends Controller
 {
+    public $msg;
     function __construct()
     {
         parent::__construct();
@@ -31,11 +32,24 @@ class NewsController extends Controller
     /**
      * Создает новость
      */
-    function create()
+    function createNews()
     {
-        $this->model->create();
-        header('Location: ' . URL . 'news');
 
+        if(empty($_POST['title']) && empty($_POST['text'])) {
+            header('Location: ' . URL . 'news/create');
+            return false;
+        }
+        $data = array(
+            'title' => Validation::filter($_POST['title']),
+            'text' => Validation::filter($_POST['text'])
+        );
+        $this->model->create($data);
+        header('Location: ' . URL . 'news');
+    }
+
+    public function create()
+    {
+        $this->render('create');
     }
 
     /**

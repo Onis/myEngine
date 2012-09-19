@@ -1,14 +1,8 @@
-<form class="form-inline" action="{$smarty.const.URL}news/create" method="POST">
-    <input type="text" name="text">
-    <input type="submit" class="btn">
-</form>
-
-<br />
-
-<table>
+<a href="{$smarty.const.URL}news/create"><h4>Создать новость</h4></a><br>
+<table border=1>
     {foreach from=$newsList key = key item = value}
         <tr>
-        <td>{$value.id}</td>
+        <td>{$value.title}</td>
         <td>{$value.text}</td>
 
         <td>
