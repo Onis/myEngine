@@ -100,7 +100,17 @@ class Validation
      */
     public static function isLogin($str)
     {
-        return (validation::isRomanAlphabet(validation::range($str, 3, 30))) ? $str : FALSE;
+        return (preg_match("/^[A-Za-z0-9]{3,15}$/", $str)) ? $str : FALSE;
+    }
+
+    /**
+     * Проверка пароля
+     * @param $str string
+     * @return string возвращает отредактированный пароль
+     */
+    public static function  isPassword($str)
+    {
+        return (preg_match("/^[a-z0-9]{5,20}$/", $str)) ? $str : FALSE;
     }
 
     /**
