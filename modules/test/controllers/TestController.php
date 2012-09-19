@@ -12,8 +12,8 @@ class TestController extends Controller
      */
     function index()
     {
-        $this->view->testList = $this->model->select();
-        $this->view->render('test/index');
+        $this->assign(array('testList' => $this->model->select()));
+        $this->render('index');
     }
 
     /**
@@ -36,6 +36,6 @@ class TestController extends Controller
      */
     function create()
     {
-        $this->view->render('test/create');
+        $this->render('create');
     }
 }

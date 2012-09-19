@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="<?php echo URL; ?>test/createQuestion" method="post">
+<form class="form-horizontal" action="{$smarty.const.URL}test/createQuestion" method="post">
     <fieldset>
         <legend>Создание вопроса</legend>
         <input type="text" name="theme" placeholder="Тема вопроса"><br />
