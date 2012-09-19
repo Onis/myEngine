@@ -13,7 +13,7 @@ class NewsController extends Controller
     function index()
     {
         $newsList = $this->model->select();
-        Bootstrap::$smarty->assign('newsList', $newsList);
+        $this->assign(array('newsList'=>$newsList));
         $this->view->render('index');
 
     }

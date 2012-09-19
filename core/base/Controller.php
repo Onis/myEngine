@@ -37,4 +37,11 @@ class Controller
     {
         $this->view->render($name);
     }
+
+    public function assign($data)
+    {
+        foreach($data as $key=>$value) {
+            $this->view->smarty->assign($key, $value);
+        }
+    }
 }

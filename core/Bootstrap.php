@@ -11,7 +11,6 @@ class Bootstrap
     function __construct()
     {
         $this->requireAllFiles();
-        $this->loadSmarty();
         if(empty($_GET['url']) || $_GET['url'] == 'index') {
             ModuleManager::loadModule('index');
         } else {
@@ -42,15 +41,6 @@ class Bootstrap
         include 'libs/Session.php';
         include 'libs/Validation.php';
         include 'libs/Smarty/Smarty.class.php';
-    }
-
-    function loadSmarty()
-    {
-        $smarty = new Smarty();
-
-        $smarty->caching = true;
-        $smarty->cache_lifetime = 300;
-        self::$smarty = $smarty;
     }
 
     /**

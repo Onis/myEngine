@@ -2,11 +2,13 @@
 
 class View
 {
-
+    public $smarty;
     /**
      *
      */
-    public function __construct() {}
+    public function __construct() {
+        $this->loadSmarty();
+    }
 
     /**
      * Осуществляет загрузку вьюхи
@@ -14,9 +16,14 @@ class View
      */
     public function render($name)
     {
-        require 'views/header.php';
         $path = 'modules/'.ModuleManager::$module.'/views/' . $name. '.tpl';
-        Bootstrap::$smarty->display($path);
-        require 'views/footer.php';
+        require 'views/header.tpl';
+        $this->smarty->display($path);
+        require 'views/footer.tpl';
+    }
+
+    public function loadSmarty()
+    {
+        $this->smarty = new Smarty();
     }
 }
