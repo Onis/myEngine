@@ -71,7 +71,7 @@ class Test_Model extends Model
         $arrayAnswers = array();
         $randomRows = $this->randomRows();
         foreach($randomRows as $key=>$value) {
-            $arrayAnswers[$key] = $this->randomAnswers($value);
+            $arrayAnswers[$key] = $this->handlerQuestion($value);
         }
         return $arrayAnswers;
     }
