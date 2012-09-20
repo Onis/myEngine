@@ -1,8 +1,7 @@
 <h3>Всем привет это главная страница моего теста по РиЭУБД!</h3>
     Хотите создать свой вопрос, тогда вам сюда --><a href="{$smarty.const.URL}test/create">жмак</a>
 
-    <br>
-<h2>{$count}</h2>
+    <hr>
 <table class="table table-bordered">
     <thead>
     <tr>
@@ -23,3 +22,5 @@
     {/foreach}
     </tbody>
 </table>
+<hr>
+<a href="{$smarty.const.URL}test/start">Начать тест</a>

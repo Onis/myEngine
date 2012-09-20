@@ -14,8 +14,6 @@ class TestController extends Controller
     {
         $this->assign(array(
             'testList' => $this->model->select(),
-            'count' => $this->model->num_rows,
-            'randomRows' => $this->model->randomRows(),
         ));
         $this->render('index');
     }
@@ -55,10 +53,12 @@ class TestController extends Controller
 
     function testing()
     {
+
         $this->assign(array(
-            'arrayAnswers' => $this->model->randomAnswers(3),
-            'randomRows' => $this->model->randomRows(),
+            'arrayAnswers' => $this->model->outputQuestions(),
         ));
+
+
         $this->render('testing');
     }
 }

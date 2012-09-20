@@ -177,7 +177,7 @@ class Database
      */
     public static function getNumRows()
     {
-        return (self::$result->num_rows) ? true : false;
+        return (self::$result->num_rows) ;
     }
 
     /**

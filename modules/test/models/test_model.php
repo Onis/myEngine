@@ -46,20 +46,34 @@ class Test_Model extends Model
         return $rows;
     }
 
-    function randomAnswers($id)
+    function handlerQuestion($id)
     {
         Database::select('*', array('id'=>$id));
         $result = Database::getResult();
         $arrayAnswers = array();
+        $arrayAnswers[] = $result[0]['correct_answer'];
+        $question = $result[0]['question'];
+
+        // обрабатываю строку с неправильными ответами
         $value['incorrect_answers'] = rtrim($result[0]['incorrect_answers'], ';');
         $array= explode(';', $value['incorrect_answers']);
+        // заношу неправльные ответы в массив
         foreach($array as $key => $value ) {
             $arrayAnswers[] = $value;
         }
-        $arrayAnswers[] = $result[0]['correct_answer'];
         shuffle($arrayAnswers);
-        $question = $result[0]['question'];
-        return $arrayTest = array($question => $arrayAnswers);
+
+        return array($question => $arrayAnswers);
+    }
+
+    function outputQuestions()
+    {
+        $arrayAnswers = array();
+        $randomRows = $this->randomRows();
+        foreach($randomRows as $key=>$value) {
+            $arrayAnswers[$key] = $this->randomAnswers($value);
+        }
+        return $arrayAnswers;
     }
 
     /**

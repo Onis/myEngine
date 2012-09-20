@@ -6,7 +6,5 @@
         <input type="text" name="correct_answer" placeholder="Правильный ответ"><br />
         <textarea rows="4" name="incorrect_answers" placeholder="Неправильные ответы"></textarea><br />
         <button type="submit" class="btn btn-primary">Сохранить</button>
-        </div>
-        </div>
     </fieldset>
 </form>
