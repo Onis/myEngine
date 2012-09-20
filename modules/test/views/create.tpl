@@ -2,9 +2,9 @@
     <fieldset>
         <legend>Создание вопроса</legend>
         <input type="text" name="theme" placeholder="Тема вопроса"><br />
-        <input type="text" name="question" placeholder="Вопрос"><br />
+        <textarea rows="4" name="question" placeholder="Вопрос"></textarea><br />
         <input type="text" name="correct_answer" placeholder="Правильный ответ"><br />
-        <input type="text" name="incorrect_answers" placeholder="Неправильные ответы"><br />
+        <textarea rows="4" name="incorrect_answers" placeholder="Неправильные ответы"></textarea><br />
         <button type="submit" class="btn btn-primary">Сохранить</button>
         </div>
         </div>

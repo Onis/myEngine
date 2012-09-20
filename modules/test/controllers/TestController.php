@@ -12,7 +12,11 @@ class TestController extends Controller
      */
     function index()
     {
-        $this->assign(array('testList' => $this->model->select()));
+        $this->assign(array(
+            'testList' => $this->model->select(),
+            'count' => $this->model->num_rows,
+            'randomRows' => $this->model->randomRows(),
+        ));
         $this->render('index');
     }
 
@@ -37,5 +41,24 @@ class TestController extends Controller
     function create()
     {
         $this->render('create');
+    }
+
+    function result()
+    {
+        $this->render('result');
+    }
+
+    function start()
+    {
+        $this->render('start');
+    }
+
+    function testing()
+    {
+        $this->assign(array(
+            'arrayAnswers' => $this->model->randomAnswers(3),
+            'randomRows' => $this->model->randomRows(),
+        ));
+        $this->render('testing');
     }
 }

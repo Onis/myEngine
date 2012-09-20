@@ -2,6 +2,7 @@
     Хотите создать свой вопрос, тогда вам сюда --><a href="{$smarty.const.URL}test/create">жмак</a>
 
     <br>
+<h2>{$count}</h2>
 <table class="table table-bordered">
     <thead>
     <tr>

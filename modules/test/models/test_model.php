@@ -10,7 +10,6 @@ class Test_Model extends Model
 
     /**
      * Вставка данных
-     * @param array $data массив с данными
      */
     function create()
     {
@@ -36,6 +35,31 @@ class Test_Model extends Model
     {
         Database::select('*');
         return Database::getResult();
+    }
+
+    function randomRows()
+    {
+        Database::select('*');
+        $rows = Database::getNumRows();
+        $rows = range(1, $rows);
+        shuffle($rows);
+        return $rows;
+    }
+
+    function randomAnswers($id)
+    {
+        Database::select('*', array('id'=>$id));
+        $result = Database::getResult();
+        $arrayAnswers = array();
+        $value['incorrect_answers'] = rtrim($result[0]['incorrect_answers'], ';');
+        $array= explode(';', $value['incorrect_answers']);
+        foreach($array as $key => $value ) {
+            $arrayAnswers[] = $value;
+        }
+        $arrayAnswers[] = $result[0]['correct_answer'];
+        shuffle($arrayAnswers);
+        $question = $result[0]['question'];
+        return $arrayTest = array($question => $arrayAnswers);
     }
 
     /**
