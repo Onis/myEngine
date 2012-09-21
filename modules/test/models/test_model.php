@@ -37,6 +37,11 @@ class Test_Model extends Model
         return Database::getResult();
     }
 
+    /**
+     * Узнает сколько записей в таблице, заносит их в массив по порядку
+     * и перемешивает элементы массива в случайном порядке.
+     * @return array
+     */
     function randomRows()
     {
         Database::select('*');
@@ -46,6 +51,11 @@ class Test_Model extends Model
         return $rows;
     }
 
+    /**
+     * Обрабатывает вопрос из БД
+     * @param int $id id, по которому производится выборка вопроса
+     * @return array
+     */
     function handlerQuestion($id)
     {
         Database::select('*', array('id'=>$id));
@@ -66,7 +76,11 @@ class Test_Model extends Model
         return array($question => $arrayAnswers);
     }
 
-    function outputQuestions()
+    /**
+     * Вывод всех вопросов в случайном порядке
+     * @return array
+     */
+    public function outputQuestions()
     {
         $arrayAnswers = array();
         $randomRows = $this->randomRows();

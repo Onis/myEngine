@@ -25,7 +25,7 @@ class Database
     /**
      * @param boolean результат запроса
      */
-    private static $result;
+    private static $result=false;
 
     /**
      * @param object ссылка на объект
@@ -113,21 +113,22 @@ class Database
      */
     public static function getResult($type = 'array')
     {
+        $data = array();
         switch ($type) {
             case 'array':
                 while ($row = self::$result->fetch_assoc()) {
-                    self::$data[] = $row;
+                    $data[] = $row;
                 }
                 break;
             case 'object':
                 while ($obj = self::$result->fetch_object()) {
-                    self::$data[] = $obj;
+                    $data[] = $obj;
                 }
                 break;
             default:
                 throw new Exception('Undefined argument: ' . $type);
         }
-        return self::$data;
+        return $data;
     }
 
     /**
