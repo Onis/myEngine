@@ -23,4 +23,4 @@
     </tbody>
 </table>
 <hr>
-<a href="{$smarty.const.URL}test/start">Начать тест</a>
+<a href="{$smarty.const.URL}testing">Начать тест</a>

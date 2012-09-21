@@ -38,59 +38,6 @@ class Test_Model extends Model
     }
 
     /**
-     * Узнает сколько записей в таблице, заносит их в массив по порядку
-     * и перемешивает элементы массива в случайном порядке.
-     * @return array
-     */
-    function randomRows()
-    {
-        Database::select('*');
-        $rows = Database::getNumRows();
-        $rows = range(1, $rows);
-        shuffle($rows);
-        return $rows;
-    }
-
-    /**
-     * Обрабатывает вопрос из БД
-     * @param int $id id, по которому производится выборка вопроса
-     * @return array
-     */
-    function handlerQuestion($id)
-    {
-        Database::select('*', array('id'=>$id));
-        $result = Database::getResult();
-        $arrayAnswers = array();
-        $arrayAnswers[] = $result[0]['correct_answer'];
-        $question = $result[0]['question'];
-
-        // обрабатываю строку с неправильными ответами
-        $value['incorrect_answers'] = rtrim($result[0]['incorrect_answers'], ';');
-        $array= explode(';', $value['incorrect_answers']);
-        // заношу неправльные ответы в массив
-        foreach($array as $key => $value ) {
-            $arrayAnswers[] = $value;
-        }
-        shuffle($arrayAnswers);
-
-        return array($question => $arrayAnswers);
-    }
-
-    /**
-     * Вывод всех вопросов в случайном порядке
-     * @return array
-     */
-    public function outputQuestions()
-    {
-        $arrayAnswers = array();
-        $randomRows = $this->randomRows();
-        foreach($randomRows as $key=>$value) {
-            $arrayAnswers[$key] = $this->handlerQuestion($value);
-        }
-        return $arrayAnswers;
-    }
-
-    /**
      * Удаляет данные по id
      * @param int $id
      */

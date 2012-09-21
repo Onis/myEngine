@@ -4,7 +4,6 @@
     <title>Движок</title>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{$smarty.const.URL}public/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="{$smarty.const.URL}public/css/default.css" >
 </head>
 <body>
     <div class="container-fluid" >
@@ -22,6 +21,7 @@
                 </div>
             </div>
 
-            <div class="hero-unit">
+            </div >
+        </div>
 
 

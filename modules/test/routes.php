@@ -5,7 +5,8 @@ return array(
     '#^test/index/?$#',
     '#^test/create/?$#',
     '#^test/createQuestion/?$#',
-    '#^test/start/?$#',
-    '#^test/testing/?$#',
-    '#^test/result/(\d+)/?$#',
+    '#^testing/?$#',
+    '#^testing/index/?$#',
+    '#^testing/run/?$#',
+    '#^testing/result/?$#',
 );

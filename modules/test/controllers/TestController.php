@@ -40,25 +40,4 @@ class TestController extends Controller
     {
         $this->render('create');
     }
-
-    function result()
-    {
-        $this->render('result');
-    }
-
-    function start()
-    {
-        $this->render('start');
-    }
-
-    function testing()
-    {
-
-        $this->assign(array(
-            'arrayAnswers' => $this->model->outputQuestions(),
-        ));
-
-
-        $this->render('testing');
-    }
 }

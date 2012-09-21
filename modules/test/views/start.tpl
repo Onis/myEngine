@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="{$smarty.const.URL}test/testing" method="post">
+<form class="form-horizontal" action="{$smarty.const.URL}testing/run" method="post">
     <fieldset>
         <legend>Опции теста</legend>
         <input type="text" name="count" placeholder="Введите колличество вопросов">
