@@ -82,15 +82,20 @@ class Testing_Model extends Model
         return $countQuestions;
     }
 
+    public $ololo;
     /**
      * Подсчитывает количество правильных ответов отвеченных на вопросы
      * @return int
      */
     public function countOfCorrectAnswers()
     {
-        $countQuestions = 5;
+        $countQuestions = 500;
         $correct_answer = 0;
+        $this->ololo = 0;
         for($i=0; $i < $countQuestions ; $i++) {
+            if(@$_POST['group'.$i] == true) {
+                $this->ololo += 1;
+            }
             @$answer = $_POST['group'.$i];
             Database::select('*' , array('correct_answer'=>$answer));
             $count = Database::getNumRows();
@@ -106,7 +111,17 @@ class Testing_Model extends Model
      */
     public function outputMark()
     {
-
+        $percent = $this->outputPercentCorrectAnswers();
+        if($percent < 50) {
+            $mark = 2;
+        } elseif($percent >= 50 && $percent < 70) {
+            $mark = 3;
+        } elseif($percent >= 70 && $percent < 90) {
+            $mark = 4;
+        } else {
+            $mark = 5;
+        }
+        return $mark;
     }
 
     /**
@@ -114,6 +129,9 @@ class Testing_Model extends Model
      */
     public function outputPercentCorrectAnswers()
     {
-
+        $correct_answer = $this->countOfCorrectAnswers();
+        $ololo = $this->ololo;
+        $percent = $correct_answer/$ololo*100;
+        return $percent;
     }
 }

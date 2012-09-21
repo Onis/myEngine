@@ -33,8 +33,8 @@ class TestingController extends Controller
     function result()
     {
         $this->assign(array(
-            'percentOfCorrectAnswers' => '??',
-            'mark' => $this->model->countOfCorrectAnswers(),
+            'percentOfCorrectAnswers' => $this->model->outputPercentCorrectAnswers(),
+            'mark' => $this->model->outputMark(),
         ));
         $this->render('result');
     }
