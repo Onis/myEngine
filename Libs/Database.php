@@ -162,11 +162,11 @@ class Database
     public static function setQueryInfo()
     {
         $info = array(
-            'affected_rows' => self::$result->affected_rows,
-            'insert_id' => self::$result->insert_id,
+            'affected_rows' => self::$link->affected_rows,
+            'insert_id' => self::$link->insert_id,
             'num_rows' => self::$result->num_rows,
-            'field_count' => self::$result->field_count,
-            'sqlstate' => self::$result->sqlstate,
+            'field_count' => self::$link->field_count,
+            'sqlstate' => self::$link->sqlstate,
         );
         return $info;
     }

@@ -6,6 +6,7 @@ class NewsController extends Controller
     function __construct()
     {
         parent::__construct();
+        $this->assign(array('jsArray' => array("news/views/js/default.js")));
     }
 
     /**
@@ -16,6 +17,12 @@ class NewsController extends Controller
         $newsList = $this->model->select();
         $this->assign(array('newsList'=>$newsList));
         $this->render('index');
+
+    }
+
+    public function select()
+    {
+        $this->model->xhrGetListing();
 
     }
 

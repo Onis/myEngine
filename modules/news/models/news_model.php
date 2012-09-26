@@ -30,7 +30,15 @@ class News_Model extends Model
     function select()
     {
         Database::select('*');
-        return Database::getResult();
+        $data = Database::getResult();
+        json_encode($data);
+    }
+
+    function xhrGetListing()
+    {
+        Database::select('*');
+        $data = Database::getResult();
+        echo json_encode($data);
     }
 
     /**
