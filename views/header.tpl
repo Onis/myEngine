@@ -4,7 +4,7 @@
     <title>Движок</title>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{$smarty.const.URL}public/css/bootstrap.min.css" >
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="{$smarty.const.URL}public/js/jquery.min.js"></script>
     <script type="text/javascript" src="{$smarty.const.URL}public/js/bootstrap.min.js"></script>
     {if (isset($jsArray))}
         {foreach from = $jsArray item = js}
@@ -13,7 +13,7 @@
     {/if}
 </head>
 <body>
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div class="row-fluid">
             <div class="navbar">
                 <div class="navbar-inner">

@@ -1,22 +1,16 @@
-$(function() {
-
-    $.get('news/index', function(o) {
-
-        alert(1);
+$.ajax({
+    url: "select",
+    type: "get",
+    dataType: "json",
+    success: function(o) {
         for (var i = 0; i < o.length; i++) {
-            $('#listInserts').append('<div>' + o.text + '</div>');
+            $('#listInserts').append('' +
+                '<tr>' +
+                '<td>' + o[i].id + '</td>' +
+                '<td>' + o[i].title + '</td>' +
+                '<td>' + o[i].text + '</td>' +
+                '</tr>'
+            );
         }
-
-    }, 'json');
-
-    $('#randomInsert').submit(function() {
-        var url = $(this).attr('action');
-        var data = $(this).serialize();
-
-        $.post(url, data, function(o) {
-
-        });
-
-        return false;
-    });
+    }
 });

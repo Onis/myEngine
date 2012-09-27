@@ -31,13 +31,6 @@ class News_Model extends Model
     {
         Database::select('*');
         $data = Database::getResult();
-        json_encode($data);
-    }
-
-    function xhrGetListing()
-    {
-        Database::select('*');
-        $data = Database::getResult();
         echo json_encode($data);
     }
 

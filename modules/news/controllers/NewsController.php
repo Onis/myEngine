@@ -14,16 +14,12 @@ class NewsController extends Controller
      */
     function index()
     {
-        $newsList = $this->model->select();
-        $this->assign(array('newsList'=>$newsList));
         $this->render('index');
-
     }
 
     public function select()
     {
-        $this->model->xhrGetListing();
-
+        $this->model->select();
     }
 
     /**
