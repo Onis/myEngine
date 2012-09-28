@@ -1,6 +1,6 @@
 <?php
 
-define('URL', 'http://localhost/MyEngine/');
+define('URL', 'http://'.$_SERVER['SERVER_NAME'].'/');
 define('HASH_GENERAL_KEY', 'MixUp200');
 define('HASH_PASSWORD_KEY', 'catsFlyHigh2000miles');
 
