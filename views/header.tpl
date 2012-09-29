@@ -6,11 +6,8 @@
     <link rel="stylesheet" href="{$smarty.const.URL}public/css/bootstrap.min.css" >
     <script src="{$smarty.const.URL}public/js/jquery.min.js"></script>
     <script type="text/javascript" src="{$smarty.const.URL}public/js/bootstrap.min.js"></script>
-    {if (isset($jsArray))}
-        {foreach from = $jsArray item = js}
-            <script type="text/javascript" src="{$smarty.const.URL}/modules/{$js}"></script>
-        {/foreach}
-    {/if}
+    <script type="text/javascript" src="{$smarty.const.URL}public/js/default.js"></script>
+    <script type="text/javascript" src="{$smarty.const.URL}public/js/jquery.validate.js"></script>
 </head>
 <body>
     <div class="container-fluid">

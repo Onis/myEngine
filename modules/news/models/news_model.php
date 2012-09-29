@@ -13,12 +13,9 @@ class News_Model extends Model
      */
     function create()
     {
-        $title = $this->filter($_POST['title']);
-        $text = $this->filter($_POST['text']);
-        $this->check();
         $data = array(
-            'title' => $title,
-            'text' => $text
+            'title' => $_POST['title'],
+            'text' => $_POST['text']
         );
         Database::insert($data);
     }

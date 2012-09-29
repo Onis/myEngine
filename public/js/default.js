@@ -6,10 +6,10 @@ $.ajax({
         for (var i = 0; i < o.length; i++) {
             $('#listInserts').append(
                 '<tr>' +
-                '<td>' + o[i].id + '</td>' +
-                '<td>' + o[i].title + '</td>' +
-                '<td>' + o[i].text + '</td>' +
-                '</tr>'
+                    '<td>' + o[i].id + '</td>' +
+                    '<td>' + o[i].title + '</td>' +
+                    '<td>' + o[i].text + '</td>' +
+                    '</tr>'
             );
         }
     }
