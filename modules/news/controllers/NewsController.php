@@ -37,9 +37,8 @@ class NewsController extends Controller
      */
     function createNews()
     {
-        ($this->model->create()) ?
-            header('Location: ' . URL . 'news') :
-            header('Location: ' . URL . 'news/create');
+        $this->model->create();
+        header('Location: ' . URL . 'news');
     }
 
     public function create()
