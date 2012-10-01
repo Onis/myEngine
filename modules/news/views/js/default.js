@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $.ajax({
-        url: "http://myengine/news/select",
+        url: "/news/select",
         type: "get",
         dataType: "json",
         success: function(o) {
@@ -14,31 +14,6 @@ $(document).ready(function() {
                     '</tr>'
                 );
             }
-        }
-    });
-
-    $("#news_form").validate({
-        rules:{
-            title:{
-                required: true,
-                minlength: 4,
-                maxlength: 30,
-            },
-            text:{
-                required: true,
-                minlength: 20,
-            },
-        },
-        messages:{
-            title:{
-                required: "Это поле обязательно для заполнения",
-                minlength: "Тема новости должна быть минимум 4 символа",
-                maxlength: "Максимальное число символов - 30",
-            },
-            text:{
-                required: "Это поле обязательно для заполнения",
-                minlength: "Содержание новости должно быть минимум 20 символов",
-            },
         }
     });
 });

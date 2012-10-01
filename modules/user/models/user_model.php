@@ -22,14 +22,9 @@ class User_Model extends Model
 
     public function editSave($id)
     {
-        $login = $this->checkValidation('login', $_POST['login']);
-        $password = $this->checkValidation('password', $_POST['password']);
-        if($this->check() === false){
-            return false;
-        };
         $postData = array(
-            'login' => $login,
-            'password' => Hash::create('md5', $password, HASH_PASSWORD_KEY),
+            'login' => $_POST['login'],
+            'password' => Hash::create('md5', $_POST['password'], HASH_PASSWORD_KEY),
             'role' => $_POST['role']
         );
         Database::update($postData, array('id'=>"{$id}"));

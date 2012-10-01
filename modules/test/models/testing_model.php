@@ -70,10 +70,7 @@ class Testing_Model extends Model
     public function countQuestions()
     {
         $this->randomRows();
-        $countQuestions = $this->checkValidation('integer', $_POST['count']);
-        if($this->check() === false){
-            return false;
-        };
+        $countQuestions = $_POST['count'];
         if(empty($countQuestions)) {
             $countQuestions=2;
         } elseif($countQuestions > $this->rows) {
@@ -82,7 +79,7 @@ class Testing_Model extends Model
         return $countQuestions;
     }
 
-    public $ololo;
+    public $countQuestion;
     /**
      * Подсчитывает количество правильных ответов отвеченных на вопросы
      * @return int
@@ -91,10 +88,10 @@ class Testing_Model extends Model
     {
         $countQuestions = 500;
         $correct_answer = 0;
-        $this->ololo = 0;
+        $this->countQuestion = 0;
         for($i=0; $i < $countQuestions ; $i++) {
             if(@$_POST['group'.$i] == true) {
-                $this->ololo += 1;
+                $this->countQuestion += 1;
             }
             @$answer = $_POST['group'.$i];
             Database::select('*' , array('correct_answer'=>$answer));
@@ -130,8 +127,8 @@ class Testing_Model extends Model
     public function outputPercentCorrectAnswers()
     {
         $correct_answer = $this->countOfCorrectAnswers();
-        $ololo = $this->ololo;
-        $percent = $correct_answer/$ololo*100;
+        $countQuestion = $this->countQuestion;
+        $percent = $correct_answer/$countQuestion*100;
         return $percent;
     }
 }

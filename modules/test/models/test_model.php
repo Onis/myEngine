@@ -13,17 +13,12 @@ class Test_Model extends Model
      */
     function create()
     {
-        $theme = $this->filter($_POST['theme']);
-        $question = $this->filter($_POST['question']);
-        $correct_answer = $this->filter($_POST['correct_answer']);
-        $incorrect_answers = $this->filter($_POST['incorrect_answers']);
-        if($this->check() === false){
-            return false;
-        };
-        $postData = array('theme' => $theme,
-            'question' => $question,
-            'correct_answer' => $correct_answer,
-            'incorrect_answers' => $incorrect_answers);
+        $postData = array(
+            'theme' => $_POST['theme'],
+            'question' => $_POST['question'],
+            'correct_answer' => $_POST['correct_answer'],
+            'incorrect_answers' => $_POST['incorrect_answers']
+        );
         Database::insert($postData);
     }
 
